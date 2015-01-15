@@ -3,7 +3,9 @@ require 'selenium-webdriver'
 
 module Common_functions
 
-  def wait_for_element how, objObject, timeOut=$timeout
+  $element_timeout=2
+
+  def wait_for_element how, objObject, timeOut=$element_timeout
 
     begin
       wait_for_it = Selenium::WebDriver::Wait.new(:timeout => timeOut)

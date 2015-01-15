@@ -3,7 +3,7 @@ require 'cucumber'
 require 'cucumber/rake/task'
 
 
-# task default: %w[features:test]
+task default: %w[features]
 
 # namespace :features do
 

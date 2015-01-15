@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 gem 'bundler'
+gem 'cukesparse'
 gem 'yard'
 gem 'rake'
 gem 'rspec'

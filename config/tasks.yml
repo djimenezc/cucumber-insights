@@ -1,0 +1,5 @@
+googleFeatures:
+ feature_order: ['features/google_search.feature']
+ runtime_defaults:
+  controller: 'chrome'
+ defaults: ['--format pretty', '-P -s']

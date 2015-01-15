@@ -16,6 +16,7 @@ class GoogleResultsPage
     @log		= log
 
     @search_results_container = Element.new('search_results_container', :css, 'div[id="search"]', @driver, @log)
+
   end
 
   # Verifies Elements for page
@@ -25,8 +26,8 @@ class GoogleResultsPage
 
   # Verifies Google Search Results container
   def verify_google_search_input
-    @search_results_container.find_element
-    @search_results_container.verify_element
+      @search_results_container.find_element
+      @search_results_container.verify_element
   end
 
 end

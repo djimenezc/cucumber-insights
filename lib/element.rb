@@ -8,7 +8,7 @@ class Element
   # Initialises Element Class
   #
   # @param [String] name names the element
-  # @param [Symbol] selector defines the selctor for the element e.g. :name, :css etc
+  # @param [Symbol] selector defines the selector for the element e.g. :name, :css etc
   # @param [String] path defines the path to the element
   # @param [Object] driver the driver instance
   # @param [Object] log the log instance
@@ -25,7 +25,7 @@ class Element
   # Highlights the element
   def highlight_element
     old_style = @element.attribute('style')
-    @driver.execute_script("arguments[0].setAttribute('style', arguments[1]);", @element, old_style + " outline: 1px dashed red;");
+    @driver.execute_script("arguments[0].setAttribute('style', arguments[1]);", @element, old_style + ' outline: 1px dashed red;');
   end
 
   # Asserts the text passed against element text
