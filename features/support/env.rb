@@ -18,7 +18,7 @@ require File.expand_path('../Common_Lib',__FILE__) #require
 require_all 'lib'
 require_all 'fixtures'
 
-$timeout = 20
+$timeout = 10
 
 # Setup Browser
 @browser_id = ENV['CONTROLLER'] ? ENV['CONTROLLER'] : 'firefox'
@@ -30,7 +30,7 @@ browser = CustomBrowser.new(@browser_id, ENV['XPOSITION'], ENV['YPOSITION'], ENV
 browser.set_window_size(browser.screen_width, browser.screen_height)
 browser.move_browser(browser.x_position, browser.y_position)
 browser.delete_cookies
-browser.set_timeout($timeout)
+# browser.set_timeout($timeout)
 
 # Actions performed before each scenario
 Before do |scenario|
@@ -40,6 +40,7 @@ Before do |scenario|
 end
 
 at_exit do
+  puts 'Closing browser and session'
   browser.log.info('Quiting the browser at: ' + DateHelper.set_log_timestamp)
   browser.driver.quit
 end
