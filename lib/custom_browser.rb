@@ -97,20 +97,6 @@ class CustomBrowser
           end
         end
         driver = :chrome
-
-      # Check Platform running script
-      # if RUBY_PLATFORM.downcase.include?('darwin')
-      #   @log.info('Using the Mac operating system')
-      #   Selenium::WebDriver.for :chrome
-      # elsif RUBY_PLATFORM.downcase.include?('linux')
-      #   @log.info('Using Linux operating system')
-      #   Selenium::WebDriver::Chrome.path = '/usr/lib/chromium-browser/chromium-browser'
-      #   Selenium::WebDriver.for :chrome
-      # else
-      #   # Default to standard if unable to determine
-      #   @log.info('Unable to determine OS - probably Windows')
-      #   Selenium::WebDriver.for :chrome
-      # end
       when 'safari'
         Selenium::WebDriver.for :safari
       when 'ios'
