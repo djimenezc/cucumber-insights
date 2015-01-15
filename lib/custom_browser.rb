@@ -30,8 +30,10 @@ class CustomBrowser
 
   # Deletes all cookies from the browser
   def delete_cookies
-    @log.info('Deleting the ' + @browser_name + ' browser cookies')
-    @driver.manage.delete_all_cookies
+    if (@browser_name != 'poltergeist')
+      @log.info('Deleting the ' + @browser_name + ' browser cookies')
+      @driver.manage.delete_all_cookies
+    end
   end
 
   # Moves the browser window to set position on screen

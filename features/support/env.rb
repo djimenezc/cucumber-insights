@@ -5,6 +5,7 @@ require 'bundler/setup'
 # Gems
 require 'capybara'
 require 'capybara/cucumber'
+require 'capybara/poltergeist'
 require 'rspec'
 require 'selenium-webdriver'
 require 'test/unit/assertions'
@@ -29,10 +30,12 @@ puts "Starting #{@browser_id} browser"
 
 browser = CustomBrowser.new(@browser_id, ENV['XPOSITION'], ENV['YPOSITION'], ENV['SCREENWIDTH'], ENV['SCREENHEIGHT'])
 
-browser.set_window_size(browser.screen_width, browser.screen_height)
-browser.move_browser(browser.x_position, browser.y_position)
-browser.delete_cookies
-browser.set_timeout($timeout)
+if (@browser_id != 'poltergeist')
+  browser.set_window_size(browser.screen_width, browser.screen_height)
+  browser.move_browser(browser.x_position, browser.y_position)
+  browser.delete_cookies
+  browser.set_timeout($timeout)
+end
 
 # Actions performed before each scenario
 Before do |scenario|
@@ -46,5 +49,7 @@ end
 at_exit do
   puts 'Closing browser and session'
   browser.log.info('Quiting the browser at: ' + DateHelper.set_log_timestamp)
-  browser.driver.quit
+  if (@browser_id != 'poltergeist')
+    browser.driver.quit
+  end
 end
