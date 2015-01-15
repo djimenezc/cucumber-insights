@@ -23,6 +23,8 @@ $timeout = 20
 # Setup Browser
 @browser_id = ENV['CONTROLLER'] ? ENV['CONTROLLER'] : 'firefox'
 
+puts "Starting #{@browser_id} browser"
+
 browser = CustomBrowser.new(@browser_id, ENV['XPOSITION'], ENV['YPOSITION'], ENV['SCREENWIDTH'], ENV['SCREENHEIGHT'])
 
 browser.set_window_size(browser.screen_width, browser.screen_height)

@@ -19,13 +19,13 @@ class CustomBrowser
   # @param [String] screen_width defines the screenWidth
   # @param [String] screen_height defines the screen_height
   def initialize(browser_name, x_position, y_position, screen_width, screen_height)
-    @browser_name    = browser_name
-    @log             = Logger.new(DirectoryHelper.create_log_directory + browser_name + '-' + DateHelper.set_log_timestamp, 'daily')
-    @driver          = start_browser(@browser_name)
-    @x_position      = x_position
-    @y_position      = y_position
-    @screen_width    = screen_width
-    @screen_height   = screen_height
+    @browser_name = browser_name
+    @log = Logger.new(DirectoryHelper.create_log_directory + browser_name + '-' + DateHelper.set_log_timestamp, 'daily')
+    @driver = start_browser(@browser_name)
+    @x_position = x_position
+    @y_position = y_position
+    @screen_width = screen_width
+    @screen_height = screen_height
   end
 
   # Deletes all cookies from the browser
@@ -66,8 +66,8 @@ class CustomBrowser
   # @param [String] screen_height sets the height of the browsers window
   def set_window_size(screen_width, screen_height)
     # Set screen_width and screen_height if defined
-    screen_width   ? screen_width   : screen_width   = 1280
-    screen_height  ? screen_height  : screen_height  = 1024
+    screen_width ? screen_width : screen_width = 1280
+    screen_height ? screen_height : screen_height = 1024
 
     @log.info('Setting the screen window size to: ' + screen_width.to_s + 'x' + screen_height.to_s)
     # @note this is currently supported in Chrome and FF
@@ -82,24 +82,22 @@ class CustomBrowser
 
     # Define browser to use from config
     case browser
-    when 'firefox'
-      Capybara.configure do |capybara|
+      when 'firefox'
+        Capybara.configure do |capybara|
+          capybara.register_driver :selenium_ff do |app|
+            Capybara::Selenium::Driver.new(app, :browser => :firefox)
+          end
 
-        Capybara.register_driver :selenium_ff do |app|
-          Capybara::Selenium::Driver.new(app, :browser => :firefox)
         end
-        capybara.default_driver = :selenium #set the browser you want to run the test on
-        capybara.run_server = false
-        capybara.javascript_driver = :selenium
-        #capybara.app_host ="https://www.youtube.com" #if you have your own project, you can set your own app_host here.
-
-      end
+        driver = :selenium
       when 'chrome'
-        Capybara.register_driver :chrome do |app|
-          Capybara::Selenium::Driver.new(app, :browser => :chrome)
+        Capybara.configure do |capybara|
+          capybara.register_driver :chrome do |app|
+            Capybara::Selenium::Driver.new(app, :browser => :chrome)
+          end
         end
+        driver = :chrome
 
-        Capybara.javascript_driver = :chrome
       # Check Platform running script
       # if RUBY_PLATFORM.downcase.include?('darwin')
       #   @log.info('Using the Mac operating system')
@@ -113,26 +111,31 @@ class CustomBrowser
       #   @log.info('Unable to determine OS - probably Windows')
       #   Selenium::WebDriver.for :chrome
       # end
-    when 'safari'
-      Selenium::WebDriver.for :safari
-    when 'ios'
-      if RUBY_PLATFORM.downcase.include?('darwin')
-        Selenium::WebDriver.for :iphone
+      when 'safari'
+        Selenium::WebDriver.for :safari
+      when 'ios'
+        if RUBY_PLATFORM.downcase.include?('darwin')
+          Selenium::WebDriver.for :iphone
+        else
+          raise 'You can\'t run IOS tests on non-mac machine'
+        end
       else
-        raise 'You can\'t run IOS tests on non-mac machine'
-      end
-    else
-      # Default to using chrome
-      @log.info('Could not determine the browser to use so using chrome')
-      Selenium::WebDriver.for :chrome
+        # Default to using chrome
+        @log.info('Could not determine the browser to use so using chrome')
+        Selenium::WebDriver.for :chrome
     end
 
     RSpec.configure do |config|
       config.include Capybara::DSL
     end
 
+    Capybara.run_server = false
+    Capybara.default_driver = driver #set the browser you want to run the test on
+    Capybara.javascript_driver = driver
+    Capybara.app_host = 'http://www.google.co.uk' #if you have your own project, you can set your own app_host here.
+
     # Return driver
-    return Capybara.current_session.driver.browser
+    Capybara.current_session.driver.browser
   end
 
 end
