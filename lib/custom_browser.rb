@@ -1,18 +1,24 @@
 # @author Jonathan Chrisp
-class Browser
+
+class CustomBrowser
+  # noinspection RubyResolve
   include DateHelper
+  # noinspection RubyResolve
   include DirectoryHelper
+  include RSpec::Matchers
+  # noinspection RubyResolve
+  include Common_functions
 
   attr_reader :driver, :browser_name, :x_position, :y_position, :screen_width, :screen_height, :log
 
   # Initialises Browser Class
   #
-  # @param [String] browserName defines the browserName
+  # @param [String] browser_name defines the browserName
   # @param [String] x_position defines the xPosition
   # @param [String] y_position defines the yPosition
   # @param [String] screen_width defines the screenWidth
   # @param [String] screen_height defines the screen_height
-  def initialize(browser_name, x_position, yPosition, screen_width, screen_height)
+  def initialize(browser_name, x_position, y_position, screen_width, screen_height)
     @browser_name    = browser_name
     @log             = Logger.new(DirectoryHelper.create_log_directory + browser_name + '-' + DateHelper.set_log_timestamp, 'daily')
     @driver          = start_browser(@browser_name)
@@ -56,7 +62,7 @@ class Browser
 
   # Sets the width and height of window
   #
-  # @param [String] screenWidth sets the width of the browsers window
+  # @param [String] screen_width sets the width of the browsers window
   # @param [String] screen_height sets the height of the browsers window
   def set_window_size(screen_width, screen_height)
     # Set screen_width and screen_height if defined
@@ -77,37 +83,56 @@ class Browser
     # Define browser to use from config
     case browser
     when 'firefox'
-      driver = Selenium::WebDriver.for :firefox
-    when 'chrome'
-      # Check Platform running script
-      if RUBY_PLATFORM.downcase.include?('darwin')
-        @log.info('Using the Mac operating system')
-        driver = Selenium::WebDriver.for :chrome
-      elsif RUBY_PLATFORM.downcase.include?('linux')
-        @log.info('Using Linux operating system')
-        Selenium::WebDriver::Chrome.path = '/usr/lib/chromium-browser/chromium-browser'
-        driver = Selenium::WebDriver.for :chrome
-      else
-        # Default to standard if unable to determine
-        @log.info('Unable to determine OS - probably Windows')
-        driver = Selenium::WebDriver.for :chrome
+      Capybara.configure do |capybara|
+
+        Capybara.register_driver :selenium_ff do |app|
+          Capybara::Selenium::Driver.new(app, :browser => :firefox)
+        end
+        capybara.default_driver = :selenium #set the browser you want to run the test on
+        capybara.run_server = false
+        capybara.javascript_driver = :selenium
+        #capybara.app_host ="https://www.youtube.com" #if you have your own project, you can set your own app_host here.
+
       end
+      when 'chrome'
+        Capybara.register_driver :chrome do |app|
+          Capybara::Selenium::Driver.new(app, :browser => :chrome)
+        end
+
+        Capybara.javascript_driver = :chrome
+      # Check Platform running script
+      # if RUBY_PLATFORM.downcase.include?('darwin')
+      #   @log.info('Using the Mac operating system')
+      #   Selenium::WebDriver.for :chrome
+      # elsif RUBY_PLATFORM.downcase.include?('linux')
+      #   @log.info('Using Linux operating system')
+      #   Selenium::WebDriver::Chrome.path = '/usr/lib/chromium-browser/chromium-browser'
+      #   Selenium::WebDriver.for :chrome
+      # else
+      #   # Default to standard if unable to determine
+      #   @log.info('Unable to determine OS - probably Windows')
+      #   Selenium::WebDriver.for :chrome
+      # end
     when 'safari'
-      driver = Selenium::WebDriver.for :safari
+      Selenium::WebDriver.for :safari
     when 'ios'
       if RUBY_PLATFORM.downcase.include?('darwin')
-        driver = Selenium::WebDriver.for :iphone
+        Selenium::WebDriver.for :iphone
       else
         raise 'You can\'t run IOS tests on non-mac machine'
       end
     else
       # Default to using chrome
       @log.info('Could not determine the browser to use so using chrome')
-      driver = Selenium::WebDriver.for :chrome
+      Selenium::WebDriver.for :chrome
+    end
+
+    RSpec.configure do |config|
+      config.include Capybara::DSL
     end
 
     # Return driver
-    return driver
+    return Capybara.current_session.driver.browser
   end
 
 end

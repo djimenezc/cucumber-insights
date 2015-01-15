@@ -1,24 +1,43 @@
+# Rubygems and Bundler
+require 'rubygems'
+require 'bundler/setup'
+
+# Gems
 require 'capybara'
 require 'capybara/cucumber'
 require 'rspec'
+require 'selenium-webdriver'
+require 'test/unit/assertions'
+require 'cucumber'
+require 'xmlsimple'
+require 'net/http'
+require 'nokogiri'
+require 'require_all'
 require File.expand_path('../Common_Lib',__FILE__) #require
 
-include RSpec::Matchers
-include Common_functions
+require_all 'lib'
+require_all 'fixtures'
 
-$timeout = 50
-Capybara.configure do |capybara|
-  browserId='firefox'
+$timeout = 20
 
-  Capybara.register_driver :selenium_ff do |app|
-    Capybara::Selenium::Driver.new(app, :browser => :firefox)
-  end
-  capybara.default_driver = :selenium_ff #set the browser you want to run the test on
-  capybara.run_server = false
-  #capybara.app_host ='https://www.youtube.com' #if you have your own project, you can set your own app_host here.
+# Setup Browser
+@browser_id = ENV['CONTROLLER'] ? ENV['CONTROLLER'] : 'firefox'
 
+browser = CustomBrowser.new(@browser_id, ENV['XPOSITION'], ENV['YPOSITION'], ENV['SCREENWIDTH'], ENV['SCREENHEIGHT'])
+
+browser.set_window_size(browser.screen_width, browser.screen_height)
+browser.move_browser(browser.x_position, browser.y_position)
+browser.delete_cookies
+browser.set_timeout($timeout)
+
+# Actions performed before each scenario
+Before do |scenario|
+  # Create browser instance variable
+  @browser = browser
+  browser.log.info('Starting the scenario: ' + "#{scenario.title}")
 end
 
-RSpec.configure do |config|
-  config.include Capybara::DSL
+at_exit do
+  browser.log.info('Quiting the browser at: ' + DateHelper.set_log_timestamp)
+  browser.driver.quit
 end
