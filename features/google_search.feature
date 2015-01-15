@@ -13,7 +13,7 @@ Feature: Google Search
     | search     |
     | fig rolls  |
     | lakers     |
-#    | raptors    |
-#    | olympics   |
-#    | selenium   |
-#    | goblins    |
+    | raptors    |
+    | olympics   |
+    | selenium   |
+    | goblins    |

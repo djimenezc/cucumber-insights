@@ -1,3 +1,5 @@
+include Common_functions
+
 Given(/^I'm on "(.*?)" page$/) do |page_to|
   visit page_to
 end
@@ -8,7 +10,7 @@ When(/^I input "(.*?)" in "(.*?)"$/) do |invalid_value, field|
   find(:xpath,field).native.send_keys(:tab)
 end
 
-Then(/^I should see "(.*?)" in label "(.*?)"$/) do |error_msg, labelError|
+Then(/^I should see something like "(.*?)" in label "(.*?)"$/) do |error_msg, labelError|
   msg = find(:xpath,labelError).text()
   msg.should == error_msg
 end
