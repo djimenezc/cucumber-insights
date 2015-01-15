@@ -105,6 +105,18 @@ class CustomBrowser
         else
           raise 'You can\'t run IOS tests on non-mac machine'
         end
+      when 'poltergeist'
+        driver = :poltergeist
+        Capybara.register_driver :poltergeist do |app|
+          options = {
+              :js_errors => true,
+              :timeout => 120,
+              :debug => false,
+              :phantomjs_options => ['--load-images=no', '--disk-cache=false'],
+              :inspector => true,
+          }
+          Capybara::Poltergeist::Driver.new(app, options)
+        end
       else
         # Default to using chrome
         @log.info('Could not determine the browser to use so using chrome')
