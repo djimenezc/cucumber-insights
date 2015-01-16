@@ -15,7 +15,7 @@ ENV['CONTROLLER'] = 'chrome'
 
     Cucumber::Rake::Task.new(:features) do |t|
       # t.profile = 'webrat'
-      t.cucumber_opts = 'features --format pretty'
+      t.cucumber_opts = 'features --format html --out reports/report.html --format pretty '
       puts 'hello cucumber'
     end
 

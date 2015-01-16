@@ -54,3 +54,7 @@ at_exit do
     browser.driver.quit
   end
 end
+
+After do |scenario|
+
+end

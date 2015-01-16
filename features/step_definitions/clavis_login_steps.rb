@@ -1,5 +1,11 @@
-Given(/^I am on the Clavis login homepage$/) do
+# Actions performed before each scenario
+Before do |scenario|
   @clavis_home_page = @browser.create_clavis_login_page
+
+  @browser.log.info('Instancing clavis login page')
+end
+
+Given(/^I am on the Clavis login homepage$/) do
 
   visit @clavis_home_page.url
 end
@@ -16,12 +22,14 @@ end
 
 
 When(/^I click the clavis log in button$/) do
-  page.save_screenshot('./reports/clavisLoginPage.png')
+  encoded_img = @browser.driver.screenshot_as(:base64)
+  embed("data:image/png;base64,#{encoded_img}",'image/png')
   click_button 'login'
 end
 
 Then(/^I am in the main page "(.*?)"$/) do |usernameLabel|
-  page.save_screenshot('./reports/mainPage.png')
+  encoded_img = @browser.driver.screenshot_as(:base64)
+  embed("data:image/png;base64,#{encoded_img}",'image/png')
   page.should have_content(usernameLabel)
   page.should have_content('Clavis Insight')
 end
@@ -39,7 +47,11 @@ Given(/^I login in Clavis homepage as KCC US$/) do
 end
 
 Then(/^Navigation Menu is visible$/) do
+  puts 'Verifying if the menu has few specific entries'
+
   page.should have_content('UPDATED Portfolio Availability')
   page.should have_content('Executive Dashboard')
   page.should have_content('Operations Dashboard')
+
+  embed_image
 end

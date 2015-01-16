@@ -1,7 +1,9 @@
 Given(/^I am on the Google homepage$/) do
   puts 'Browsing to google'
   visit 'http://www.google.co.uk'
-  page.save_screenshot('./reports/test.pdf')
+
+  encoded_img = @browser.driver.screenshot_as(:base64)
+  embed("data:image/png;base64,#{encoded_img}",'image/png')
 end
 
 Then(/^I will search for "(.*?)"$/) do |searchText|
@@ -12,7 +14,8 @@ end
 Then(/^I should see "(.*?)"$/) do |expectedText|
   puts 'Checking the search result'
   page.should have_content(expectedText)
-  page.save_screenshot('./reports/test2.pdf')
+  encoded_img = @browser.driver.screenshot_as(:base64)
+  embed("data:image/png;base64,#{encoded_img}",'image/png')
 end
 
 Then(/^I will click the terms link$/) do
