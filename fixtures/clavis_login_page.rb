@@ -17,4 +17,15 @@ class ClavisHomePage
 
   end
 
+  def open_clavis_home_page
+
+    username = 'kcc_us@clavistechnology.com'
+    password = 'Testing!700'
+
+    visit self.url
+    fill_in 'user_email', :with => username
+    fill_in 'user_password', :with => password
+    click_button 'login'
+  end
+
 end

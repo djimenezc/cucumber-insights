@@ -1,5 +1,5 @@
 Given(/^I am on the Clavis login homepage$/) do
-  @clavis_home_page = @browser.open_clavis
+  @clavis_home_page = @browser.create_clavis_login_page
 
   visit @clavis_home_page.url
 end
@@ -27,8 +27,8 @@ Then(/^I am in the main page "(.*?)"$/) do |usernameLabel|
 end
 
 Given(/^I login in Clavis homepage as KCC US$/) do
-  @clavis_home_page = @browser.open_clavis
 
+  # @clavis_home_page.open_clavis_home_page
   username = 'kcc_us@clavistechnology.com'
   password = 'Testing!700'
 

@@ -57,7 +57,7 @@ class CustomBrowser
   end
 
   # Opens clavis
-  def open_clavis
+  def create_clavis_login_page
     self.delete_cookies
 
     # Return ClavisHome page instance
