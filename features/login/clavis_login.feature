@@ -1,5 +1,5 @@
 Feature: Login in Clavis Insight platform
-  The login page verify if the username and password are correct.
+  The login page verifies if the username and password are correct.
 
   Scenario Outline: Login in the app
     Given I am on the Clavis login homepage
@@ -9,6 +9,9 @@ Feature: Login in Clavis Insight platform
     Then I am in the main page "<usernameLabel>"
 
   Examples:
-  | username                              | password       | usernameLabel    |
-  | kcc_us@clavistechnology.com           | Testing!700    | KCC US           |
-  | general_mills_us@clavistechnology.com | Testing!500    | General Mills US |
+    | username                              | password    | usernameLabel    |
+    | kcc_us@clavistechnology.com           | Testing!700 | KCC US           |
+    | general_mills_us@clavistechnology.com | Testing!500 | General Mills US |
+
+
+

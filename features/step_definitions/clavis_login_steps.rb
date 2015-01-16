@@ -25,3 +25,21 @@ Then(/^I am in the main page "(.*?)"$/) do |usernameLabel|
   page.should have_content(usernameLabel)
   page.should have_content('Clavis Insight')
 end
+
+Given(/^I login in Clavis homepage as KCC US$/) do
+  @clavis_home_page = @browser.open_clavis
+
+  username = 'kcc_us@clavistechnology.com'
+  password = 'Testing!700'
+
+  visit @clavis_home_page.url
+  fill_in 'user_email', :with => username
+  fill_in 'user_password', :with => password
+  click_button 'login'
+end
+
+Then(/^Navigation Menu is visible$/) do
+  page.should have_content('UPDATED Portfolio Availability')
+  page.should have_content('Executive Dashboard')
+  page.should have_content('Operations Dashboard')
+end
