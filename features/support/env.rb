@@ -20,7 +20,7 @@ require File.expand_path('../Common_Lib', __FILE__) #require
 require_all 'lib'
 require_all 'fixtures'
 
-$timeout = 5
+$timeout = 1
 $element_timeout=2
 
 # Setup Browser
