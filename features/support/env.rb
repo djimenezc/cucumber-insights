@@ -25,10 +25,11 @@ $element_timeout=2
 
 # Setup Browser
 @browser_id = ENV['CONTROLLER'] ? ENV['CONTROLLER'] : 'firefox'
+@site_url = ENV['URL'] ? ENV['URL'] : 'http://all-ei-dev.elasticbeanstalk.com/'
 
 puts "Starting #{@browser_id} browser"
 
-browser = CustomBrowser.new(@browser_id, ENV['XPOSITION'], ENV['YPOSITION'], ENV['SCREENWIDTH'], ENV['SCREENHEIGHT'])
+browser = CustomBrowser.new(@browser_id, ENV['XPOSITION'], ENV['YPOSITION'], ENV['SCREENWIDTH'], ENV['SCREENHEIGHT'], @site_url)
 
 if (@browser_id != 'poltergeist')
   browser.set_window_size(browser.screen_width, browser.screen_height)

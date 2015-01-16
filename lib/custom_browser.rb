@@ -9,7 +9,7 @@ class CustomBrowser
   # noinspection RubyResolve
   include Common_functions
 
-  attr_reader :driver, :browser_name, :x_position, :y_position, :screen_width, :screen_height, :log
+  attr_reader :driver, :browser_name, :x_position, :y_position, :screen_width, :screen_height, :log, :site_url
 
   # Initialises Browser Class
   #
@@ -18,7 +18,8 @@ class CustomBrowser
   # @param [String] y_position defines the yPosition
   # @param [String] screen_width defines the screenWidth
   # @param [String] screen_height defines the screen_height
-  def initialize(browser_name, x_position, y_position, screen_width, screen_height)
+  # @param [String] site_url defines url of the site
+  def initialize(browser_name, x_position, y_position, screen_width, screen_height, site_url)
     @browser_name = browser_name
     @log = Logger.new(DirectoryHelper.create_log_directory + browser_name + '-' + DateHelper.set_log_timestamp, 'daily')
     @driver = start_browser(@browser_name)
@@ -26,6 +27,7 @@ class CustomBrowser
     @y_position = y_position
     @screen_width = screen_width
     @screen_height = screen_height
+    @site_url = site_url
   end
 
   # Deletes all cookies from the browser
@@ -52,6 +54,14 @@ class CustomBrowser
 
     # Return GoogleHome page instance
     GoogleHomePage.new('GoogleHomePage', @driver, @log)
+  end
+
+  # Opens clavis
+  def open_clavis
+    self.delete_cookies
+
+    # Return ClavisHome page instance
+    ClavisHomePage.new('ClavisHomePage', @driver, @log, @site_url)
   end
 
   # Sets the timeout to find elements

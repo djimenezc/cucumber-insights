@@ -1,5 +1,5 @@
 googleFeatures:
- feature_order: ['features/findGameSparks.feature']
+ feature_order: ['features/find_game_sparks.feature']
  runtime_defaults:
   controller: 'chrome'
  defaults: ['--format pretty', '-P -s']
