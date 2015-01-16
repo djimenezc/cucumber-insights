@@ -3,10 +3,10 @@ Feature: Login in Clavis Insight platform
 
   Scenario Outline: Login in the app
     Given I am on the Clavis login homepage
-    And I will type the userName "<username>"
-    And I will type the password "<password>"
-    When I will click the clavis log in button
-    Then Verify I am in the main page "<usernameLabel>"
+    When I type the userName "<username>"
+    And I type the password "<password>"
+    And I click the clavis log in button
+    Then I am in the main page "<usernameLabel>"
 
   Examples:
   | username                              | password       | usernameLabel    |
