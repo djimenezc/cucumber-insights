@@ -67,9 +67,10 @@ class CustomBrowser
   # Sets the timeout to find elements
   #
   # @param [String] timeout value for timeout
-  def set_timeout(timeout)
-    @log.info('Setting the selenium timeout to: ' + timeout.to_s)
+  def set_timeout(timeout, element_timeout)
+    @log.info('Setting the selenium timeout to: ' + timeout.to_s + ' element timeout: '+element_timeout.to_s)
     @driver.manage.timeouts.implicit_wait = timeout
+    Capybara.default_wait_time = element_timeout
   end
 
   # Sets the width and height of window

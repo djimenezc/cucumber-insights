@@ -15,7 +15,7 @@ require 'net/http'
 require 'nokogiri'
 require 'require_all'
 require File.expand_path('../Common_Lib', __FILE__) #require
-
+require 'date'
 
 require_all 'lib'
 require_all 'fixtures'
@@ -35,7 +35,7 @@ if (@browser_id != 'poltergeist')
   browser.set_window_size(browser.screen_width, browser.screen_height)
   browser.move_browser(browser.x_position, browser.y_position)
   browser.delete_cookies
-  browser.set_timeout($timeout)
+  browser.set_timeout($timeout, $element_timeout)
 end
 
 # Actions performed before each scenario
