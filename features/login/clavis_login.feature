@@ -1,7 +1,7 @@
-Feature: Login in Clavis Insight platform
+Feature: Log in Clavis Insight platform
   The login page verifies if the username and password are correct.
 
-  Scenario Outline: Login in the app
+  Scenario Outline: Log in
     Given I am on the Clavis login homepage
     When I type the userName "<username>"
     And I type the password "<password>"

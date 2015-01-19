@@ -32,7 +32,7 @@ Then(/^I am in the main page "(.*?)"$/) do |usernameLabel|
   page.should have_content('Clavis Insight')
 end
 
-Given(/^I login in Clavis homepage as KCC US$/) do
+Given(/^I log in Clavis homepage as KCC US$/) do
 
   # @clavis_home_page.open_clavis_home_page
   username = 'kcc_us@clavistechnology.com'
@@ -44,28 +44,33 @@ Given(/^I login in Clavis homepage as KCC US$/) do
   click_button 'login'
 end
 
-Then(/^Navigation Menu is visible$/) do
-  puts 'Verifying if the menu has few specific entries'
+Given(/^I am in the executive login page$/) do
+  visit "#{@clavis_home_page.url}#executive"
+
+  page.should have_css('#loading')
+  page.should have_css('#pageTitle', :text => 'Executive Dashboard')
+  wait_for_ajax 20
+  page.should have_no_css('#loading')
 
   embed_image
+end
+
+Then(/^Navigation Menu is visible$/) do
+  puts 'Verifying if the menu has few specific entries'
 
   page.should have_content('Portfolio Availability')
   page.should have_content('Executive Dashboard')
   page.should have_content('Operations Dashboard')
 
-  page.should have_selector('#pageTitle', :text => 'Executive Dashboard')
-  embed_image
-  page.should have_selector('tspan', :text => 'Dec 25')
-  embed_image 'Before page is loaded completely'
+  page.should have_selector('#pageTitle')
+  embed_image 'Page is loaded completely'
 end
 
 Then(/^Change the filter date range to '(\d+)\-(\d+)\-(\d+)' from '(\d+)\-(\d+)\-(\d+)'$/) do |toYear, toMonth, toDay, fromYear, fromMonth, fromDay|
 
-  visit "#{@clavis_home_page.url}#executive"
-
   puts "Change the filter date range to #{toYear}-#{toMonth}-#{toDay} from #{fromYear}-#{fromMonth}-#{fromDay}"
 
-  month_array = Date::MONTHNAMES.slice(1,12)
+  month_array = Date::MONTHNAMES.slice(1, 12)
   previous_month = Date.today.mon - 2
   previous_month_year = Date.today.mon - 2 > 0 ? Date.today.year : Date.today.year - 1
   current_month = Date.today.mon - 1
@@ -73,9 +78,6 @@ Then(/^Change the filter date range to '(\d+)\-(\d+)\-(\d+)' from '(\d+)\-(\d+)\
 
   puts "current date #{month_array[current_month]}, #{Date.today.year}"
 
-  page.should have_css('#loading')
-  wait_for_ajax 10
-  page.should have_no_css('#loading')
   expect(page).to have_css('.date-range-field > span', text: '22nd Dec, 2014 - 19th Jan, 2015')
   page.first('.date-range-field').click
 
@@ -85,7 +87,6 @@ Then(/^Change the filter date range to '(\d+)\-(\d+)\-(\d+)' from '(\d+)\-(\d+)\
 
   embed_image 'After date picker is clicked'
 
-  # page.last('.datepickerSaturday.datepickerSelected.selectableDate').click
   page.all('.datepickerSaturday.datepickerSelected.selectableDate').last.click
 
   page.first('.datepickerGoPrev').click
@@ -111,4 +112,38 @@ Then(/^Change the filter date range to '(\d+)\-(\d+)\-(\d+)' from '(\d+)\-(\d+)\
   page.should have_content("#{month_array[current_month]}, #{Date.today.year}")
 
   embed_image 'The date picker shows the new selected range'
+
+  puts 'Closing date picker'
+  page.first('.date-range-field').click
+end
+
+Then(/^Open dimension filter picker$/) do
+
+  expect(page).to have_css('.filter_summary', text: 'All')
+  page.first('.filter_summary').click
+  page.should have_selector('.row-fluid.filters_selection', visible: true)
+  page.should have_content('Online Stores')
+  page.should have_content('Brands')
+  page.should have_content('Categories')
+  expect(page).to have_css('.applyFilters', text: 'Apply', visible: true)
+
+  embed_image 'The dimension filter is displayed'
+
+  filter_checkbox = find('input[data-name="Family Care"]')
+  filter_checkbox.should be_checked
+
+  page.first('input[data-name="Baby Care"]').click
+  page.first('input[data-name="Family Care"]').click
+
+  filter_checkbox.should_not be_checked
+
+  page.first('.applyFilters').click
+  page.should have_css('#loading')
+  wait_for_ajax 25
+  page.should have_no_css('#loading')
+
+  page.first('.filter_summary').click
+  wait_for_ajax 25
+
+  embed_image 'Dashboard after the dimension filter were applied'
 end
