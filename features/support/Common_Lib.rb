@@ -43,7 +43,12 @@ module Common_functions
     page.evaluate_script('jQuery.active').zero?
   end
   # RSpec.configure do |config|
-  #   config.include WaitForAjax, type: :feature
+  #   config.include wait_for_ajax, type: :feature
   # end
 
+  def class_from_string(str)
+    str.split('::').inject(Object) do |mod, class_name|
+      mod.const_get(class_name)
+    end
+  end
 end

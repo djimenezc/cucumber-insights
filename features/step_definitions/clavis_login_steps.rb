@@ -1,8 +1,16 @@
 # Actions performed before each scenario
 Before do |scenario|
-  @clavis_home_page = @browser.create_clavis_login_page
 
-  @browser.log.info('Instancing clavis login page')
+  if scenario.source_tag_names.include? '@do-thing-1'
+    # @browser.send("create_#{@tag}_page", self)
+    pageId = 'ClavisHomePage';
+  elsif scenario.source_tag_names.include? 'do-thing-2'
+
+  end
+
+  @clavis_home_page = @browser.create_clavis_page(self, pageId)
+
+  @browser.log.info('Instancing clavis page')
 end
 
 Given(/^I am on the Clavis login homepage$/) do
@@ -32,16 +40,15 @@ Then(/^I am in the main page "(.*?)"$/) do |usernameLabel|
   page.should have_content('Clavis Insight')
 end
 
+# Given that i log in a standard user do
+#   steps %{
+#         I log in Clavis home as "foo" with "bar"
+#   }
+# end
+
 Given(/^I log in Clavis homepage as KCC US$/) do
 
-  # @clavis_home_page.open_clavis_home_page
-  username = 'kcc_us@clavistechnology.com'
-  password = 'Testing!700'
-
-  visit @clavis_home_page.url
-  fill_in 'user_email', :with => username
-  fill_in 'user_password', :with => password
-  click_button 'login'
+  @clavis_home_page.open_clavis_home_page
 end
 
 Given(/^I am in the executive login page$/) do
@@ -75,10 +82,12 @@ Then(/^Change the filter date range to '(\d+)\-(\d+)\-(\d+)' from '(\d+)\-(\d+)\
   previous_month_year = Date.today.mon - 2 > 0 ? Date.today.year : Date.today.year - 1
   current_month = Date.today.mon - 1
   next_month_year = Date.today.mon != 12 ? Date.today.year : Date.today.year + 1
+  todayDateFormatted = Date.today.strftime('%b')
+  datepickerText = '23rd Dec, 2014 - 20th Jan, 2015'
 
   puts "current date #{month_array[current_month]}, #{Date.today.year}"
 
-  expect(page).to have_css('.date-range-field > span', text: '22nd Dec, 2014 - 19th Jan, 2015')
+  expect(page).to have_css('.date-range-field > span', text: datepickerText)
   page.first('.date-range-field').click
 
   page.should have_content("#{month_array[previous_month]}, #{previous_month_year}")

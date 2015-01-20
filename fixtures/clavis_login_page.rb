@@ -9,12 +9,12 @@ class ClavisHomePage
   # @param [Object] driver defines the driver instance
   # @param [Object] log defines the log instance
   # @param [Object] url defines the clavis login url
-  def initialize(name, driver, log, url)
+  def initialize(name, driver, log, url, scenario)
     @name = name
     @driver = driver
     @log = log
     @url = url
-
+    @scenario = scenario
   end
 
   def open_clavis_home_page
@@ -22,10 +22,10 @@ class ClavisHomePage
     username = 'kcc_us@clavistechnology.com'
     password = 'Testing!700'
 
-    visit self.url
-    fill_in 'user_email', :with => username
-    fill_in 'user_password', :with => password
-    click_button 'login'
+    @scenario.visit self.url
+    @scenario.fill_in 'user_email', :with => username
+    @scenario.fill_in 'user_password', :with => password
+    @scenario.click_button 'login'
   end
 
 end

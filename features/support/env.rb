@@ -8,7 +8,8 @@ require 'capybara/cucumber'
 require 'capybara/poltergeist'
 require 'rspec'
 require 'selenium-webdriver'
-require 'test/unit/assertions'
+# require 'test/unit/assertions'
+require 'minitest/autorun'
 require 'cucumber'
 require 'xmlsimple'
 require 'net/http'
@@ -25,7 +26,7 @@ $element_timeout=2
 
 # Setup Browser
 @browser_id = ENV['CONTROLLER'] ? ENV['CONTROLLER'] : 'firefox'
-@site_url = ENV['URL'] ? ENV['URL'] : 'http://localhost:3000/'
+@site_url = ENV['URL'] ? ENV['URL'] : 'http://all-ei-dev.elasticbeanstalk.com/'
 
 puts "Starting #{@browser_id} browser"
 
