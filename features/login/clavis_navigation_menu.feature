@@ -4,8 +4,7 @@ Feature: Verify executive dashboard
 
   @do-thing-1
   Scenario: Log in
-    Given I log in Clavis homepage as KCC US
-    Then I am in the main page "KCC US"
+    Given I log in Clavis homepage as KCC US 2
     Then Navigation Menu is visible
 
   @do-thing-1
@@ -15,3 +14,4 @@ Feature: Verify executive dashboard
     Given I am in the executive login page
     Then Change the filter date range to '2014-05-01' from '2014-05-01'
     Then Open dimension filter picker
+    Then Uncheck categories

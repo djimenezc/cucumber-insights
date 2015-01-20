@@ -51,6 +51,11 @@ Given(/^I log in Clavis homepage as KCC US$/) do
   @clavis_home_page.open_clavis_home_page
 end
 
+Given(/^I log in Clavis homepage as KCC US 2$/) do
+  step 'I log in Clavis homepage as KCC US'
+  step 'I am in the main page "KCC US"'
+end
+
 Given(/^I am in the executive login page$/) do
   visit "#{@clavis_home_page.url}#executive"
 
@@ -137,6 +142,10 @@ Then(/^Open dimension filter picker$/) do
   expect(page).to have_css('.applyFilters', text: 'Apply', visible: true)
 
   embed_image 'The dimension filter is displayed'
+
+end
+
+Then(/^Uncheck categories$/) do
 
   filter_checkbox = find('input[data-name="Family Care"]')
   filter_checkbox.should be_checked

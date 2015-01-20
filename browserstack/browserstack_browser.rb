@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'selenium-webdriver'
-require './fast_selenium'
+require '../lib/fast_selenium'
 
 # Input capabilities
 caps = Selenium::WebDriver::Remote::Capabilities.new
