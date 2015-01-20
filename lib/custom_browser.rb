@@ -95,6 +95,10 @@ class CustomBrowser
   def start_browser(browser)
     @log.info('Starting the browser: ' + browser)
 
+    browserstack_url = self.get_browserstack_url
+    browserstack_capabilities = self.get_browser_capabilities
+
+    self.get_browser_capabilities
     # Define browser to use from config
     case browser
       when 'firefox'
@@ -108,7 +112,11 @@ class CustomBrowser
       when 'chrome'
         Capybara.configure do |capybara|
           capybara.register_driver :chrome do |app|
-            Capybara::Selenium::Driver.new(app, :browser => :chrome)
+            if (ENV['browserstack'])
+              Capybara::Selenium::Driver.new(app, :browser => :chrome, :url => browserstack_url, :desired_capabilities => browserstack_capabilities)
+            else
+              Capybara::Selenium::Driver.new(app, :browser => :chrome)
+            end
           end
         end
         driver = :chrome
@@ -151,4 +159,35 @@ class CustomBrowser
     Capybara.current_session.driver.browser
   end
 
+  def get_browserstack_url
+
+    username=ENV['BS_USERNAME'] ? ENV['BS_USERNAME'] : 'david1347'
+    key=ENV['BS_AUTHKEY'] ? ENV['BS_AUTHKEY'] : 'ntnBqvSYwxip1XQUnPM7'
+    url = "http://#{username}:#{key}@hub.browserstack.com/wd/hub"
+
+    url
+  end
+
+  def get_browser_capabilities
+
+    capabilities = Selenium::WebDriver::Remote::Capabilities.new
+
+    capabilities['project'] = ENV['BS_AUTOMATE_PROJECT'] if ENV['BS_AUTOMATE_PROJECT']
+    capabilities['build'] = ENV['BS_AUTOMATE_BUILD'] if ENV['BS_AUTOMATE_BUILD']
+
+    if ENV['BS_AUTOMATE_OS']
+      capabilities['os'] = ENV['BS_AUTOMATE_OS']
+      capabilities['os_version'] = ENV['BS_AUTOMATE_OS_VERSION']
+    else
+      capabilities['platform'] = ENV['SELENIUM_PLATFORM'] || 'ANY'
+    end
+
+    capabilities['browser'] = ENV['SELENIUM_BROWSER'] || 'chrome'
+    capabilities['browser_version'] = ENV['SELENIUM_VERSION'] if ENV['SELENIUM_VERSION']
+
+    capabilities['browserstack.debug'] = 'true'
+    capabilities['name'] = 'Testing Insights Login Page'
+
+    capabilities
+  end
 end
