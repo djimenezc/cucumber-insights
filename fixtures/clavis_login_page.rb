@@ -20,10 +20,15 @@ class ClavisHomePage
     @datepicker_info = nil
   end
 
-  def open_clavis_home_page
+  def open_clavis_home_page(usernameLabel)
 
-    username = 'kcc_us@clavistechnology.com'
-    password = 'Testing!700'
+    if (usernameLabel == 'General Mills US')
+      username = 'general_mills_us@clavistechnology.com'
+      password = 'Testing!500'
+    else
+      username = 'kcc_us_test2@clavisinsight.com'
+      password = 'Testing!700'
+    end
 
     @scenario.visit self.url
     @scenario.fill_in 'user_email', :with => username

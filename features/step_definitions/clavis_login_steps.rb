@@ -46,14 +46,14 @@ Then(/^I am in the main page "(.*?)"$/) do |usernameLabel|
   page.should have_content('Clavis Insight')
 end
 
-Given(/^I log in Clavis homepage as KCC US$/) do
+Given(/^I log in Clavis homepage as "(.*?)"$/) do |usernameLabel|
 
-  @clavis_home_page.open_clavis_home_page
+  @clavis_home_page.open_clavis_home_page(usernameLabel)
 end
 
 Given(/^I log in Clavis homepage as KCC US 2$/) do
-  step 'I log in Clavis homepage as KCC US'
-  step 'I am in the main page "KCC US"'
+  step 'I log in Clavis homepage as "KCC US"'
+  step 'I am in the main page "KCC TEST USER"'
 end
 
 Given(/^I am in the executive login page$/) do
