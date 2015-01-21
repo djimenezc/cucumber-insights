@@ -57,7 +57,7 @@ at_exit do
   end
 end
 
-After do |scenario|
+After do | |
 
-  puts 'After sceneario is executed'
+  puts 'After scenario is executed'
 end

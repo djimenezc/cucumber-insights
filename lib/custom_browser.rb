@@ -112,7 +112,7 @@ class CustomBrowser
       when 'chrome'
         Capybara.configure do |capybara|
           capybara.register_driver :chrome do |app|
-            if (ENV['browserstack'])
+            if (ENV['browserstack'] && ENV['browserstack'] == 'true')
               Capybara::Selenium::Driver.new(app, :browser => :chrome, :url => browserstack_url, :desired_capabilities => browserstack_capabilities)
             else
               Capybara::Selenium::Driver.new(app, :browser => :chrome)
