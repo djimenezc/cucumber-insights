@@ -12,6 +12,8 @@ Feature: Verify executive dashboard
     Given I log in Clavis homepage as KCC US
     Given I am in the main page "KCC US"
     Given I am in the executive login page
+    Given Date picker date label is correct
     Then Change the filter date range to '2014-05-01' from '2014-05-01'
+    Then Verify that the date picker filter is applied
     Then Open dimension filter picker
     Then Uncheck categories

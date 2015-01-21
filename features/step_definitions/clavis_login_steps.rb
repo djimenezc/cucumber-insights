@@ -1,15 +1,19 @@
 # Actions performed before each scenario
 Before do |scenario|
 
+  page_id = ''
+
   if scenario.source_tag_names.include? '@do-thing-1'
     # @browser.send("create_#{@tag}_page", self)
-    pageId = 'ClavisHomePage';
+    page_id = 'ClavisHomePage';
   elsif scenario.source_tag_names.include? 'do-thing-2'
 
   end
 
-  @clavis_home_page = @browser.create_clavis_page(self, pageId)
+  # noinspection RubyResolve
+  @clavis_home_page = @browser.create_clavis_page(self, page_id)
 
+  # noinspection RubyResolve
   @browser.log.info('Instancing clavis page')
 end
 
@@ -36,15 +40,11 @@ end
 
 Then(/^I am in the main page "(.*?)"$/) do |usernameLabel|
   embed_image
+  # noinspection RubyResolve
   page.should have_content(usernameLabel)
+  # noinspection RubyResolve
   page.should have_content('Clavis Insight')
 end
-
-# Given that i log in a standard user do
-#   steps %{
-#         I log in Clavis home as "foo" with "bar"
-#   }
-# end
 
 Given(/^I log in Clavis homepage as KCC US$/) do
 
@@ -59,10 +59,9 @@ end
 Given(/^I am in the executive login page$/) do
   visit "#{@clavis_home_page.url}#executive"
 
-  page.should have_css('#loading')
+  verify_loading_mask_hidden 25
+
   page.should have_css('#pageTitle', :text => 'Executive Dashboard')
-  wait_for_ajax 20
-  page.should have_no_css('#loading')
 
   embed_image
 end
@@ -70,34 +69,40 @@ end
 Then(/^Navigation Menu is visible$/) do
   puts 'Verifying if the menu has few specific entries'
 
+  # noinspection RubyResolve
   page.should have_content('Portfolio Availability')
+  # noinspection RubyResolve
   page.should have_content('Executive Dashboard')
+  # noinspection RubyResolve
   page.should have_content('Operations Dashboard')
 
   page.should have_selector('#pageTitle')
   embed_image 'Page is loaded completely'
 end
 
+Given(/^Date picker date label is correct$/) do | |
+
+  datepicker_info = @clavis_home_page.get_datepicker_info
+  datepicker_text = "#{datepicker_info.from_date_formatted} - #{datepicker_info.to_date_formatted}"
+
+  puts "date picker text expected #{datepicker_text}"
+
+  expect(page).to have_css('.date-range-field > span', text: datepicker_text)
+end
+
 Then(/^Change the filter date range to '(\d+)\-(\d+)\-(\d+)' from '(\d+)\-(\d+)\-(\d+)'$/) do |toYear, toMonth, toDay, fromYear, fromMonth, fromDay|
 
   puts "Change the filter date range to #{toYear}-#{toMonth}-#{toDay} from #{fromYear}-#{fromMonth}-#{fromDay}"
 
-  month_array = Date::MONTHNAMES.slice(1, 12)
-  previous_month = Date.today.mon - 2
-  previous_month_year = Date.today.mon - 2 > 0 ? Date.today.year : Date.today.year - 1
-  current_month = Date.today.mon - 1
-  next_month_year = Date.today.mon != 12 ? Date.today.year : Date.today.year + 1
-  todayDateFormatted = Date.today.strftime('%b')
-  datepickerText = '23rd Dec, 2014 - 20th Jan, 2015'
-
-  puts "current date #{month_array[current_month]}, #{Date.today.year}"
-
-  expect(page).to have_css('.date-range-field > span', text: datepickerText)
   page.first('.date-range-field').click
 
-  page.should have_content("#{month_array[previous_month]}, #{previous_month_year}")
-  page.should have_content("#{month_array[current_month]}, #{Date.today.year}")
-  page.should have_content("#{month_array[Date.today.mon]}, #{next_month_year}")
+  datepicker_info = @clavis_home_page.get_datepicker_info
+  # noinspection RubyResolve
+  page.should have_content("#{@clavis_home_page.month_array[datepicker_info.previous_month]}, #{datepicker_info.previous_month_year}")
+  # noinspection RubyResolve
+  page.should have_content("#{@clavis_home_page.month_array[datepicker_info.current_month]}, #{Date.today.year}")
+  # noinspection RubyResolve
+  page.should have_content("#{@clavis_home_page.month_array[Date.today.mon]}, #{datepicker_info.next_month_year}")
 
   embed_image 'After date picker is clicked'
 
@@ -108,22 +113,28 @@ Then(/^Change the filter date range to '(\d+)\-(\d+)\-(\d+)' from '(\d+)\-(\d+)\
   page.first('.datepickerGoPrev').click
 
   previous_month_year = Date.today.mon - 3 > 0 ? Date.today.year : Date.today.year - 1
-  page.should have_content("#{month_array[Date.today.mon - 3]}, #{previous_month_year}")
+  # noinspection RubyResolve
+  page.should have_content("#{@clavis_home_page.month_array[Date.today.mon - 3]}, #{previous_month_year}")
   previous_month_year = Date.today.mon - 4 > 0 ? Date.today.year : Date.today.year - 1
-  page.should have_content("#{month_array[Date.today.mon - 4]}, #{previous_month_year}")
+  # noinspection RubyResolve
+  page.should have_content("#{@clavis_home_page.month_array[Date.today.mon - 4]}, #{previous_month_year}")
   previous_month_year = Date.today.mon - 5 > 0 ? Date.today.year : Date.today.year - 1
-  page.should have_content("#{month_array[Date.today.mon - 5]}, #{previous_month_year}")
+  # noinspection RubyResolve
+  page.should have_content("#{@clavis_home_page.month_array[Date.today.mon - 5]}, #{previous_month_year}")
 
   page.first('.datepickerSaturday.selectableDate').click
 
+  verify_loading_mask_hidden
+end
+
+Then(/^Verify that the date picker filter is applied$/) do
+
   embed_image 'After date picker previous button was clicked three times and the range was set'
 
-  page.should have_css('#loading')
-  wait_for_ajax 25
-  page.should have_no_css('#loading')
-
   page.first('.date-range-field').click
-  page.should have_content("#{month_array[current_month]}, #{Date.today.year}")
+
+  # noinspection RubyResolve
+  page.should have_content("#{@clavis_home_page.month_array[@clavis_home_page.get_datepicker_info.current_month]}, #{Date.today.year}")
 
   embed_image 'The date picker shows the new selected range'
 
@@ -136,8 +147,11 @@ Then(/^Open dimension filter picker$/) do
   expect(page).to have_css('.filter_summary', text: 'All')
   page.first('.filter_summary').click
   page.should have_selector('.row-fluid.filters_selection', visible: true)
+  # noinspection RubyResolve
   page.should have_content('Online Stores')
+  # noinspection RubyResolve
   page.should have_content('Brands')
+  # noinspection RubyResolve
   page.should have_content('Categories')
   expect(page).to have_css('.applyFilters', text: 'Apply', visible: true)
 
@@ -148,17 +162,18 @@ end
 Then(/^Uncheck categories$/) do
 
   filter_checkbox = find('input[data-name="Family Care"]')
+  # noinspection RubyResolve
   filter_checkbox.should be_checked
 
   page.first('input[data-name="Baby Care"]').click
   page.first('input[data-name="Family Care"]').click
 
+  # noinspection RubyResolve
   filter_checkbox.should_not be_checked
 
   page.first('.applyFilters').click
-  page.should have_css('#loading')
-  wait_for_ajax 25
-  page.should have_no_css('#loading')
+
+  verify_loading_mask_hidden 25
 
   page.first('.filter_summary').click
   wait_for_ajax 25

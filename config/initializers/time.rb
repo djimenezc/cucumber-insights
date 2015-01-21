@@ -3,7 +3,7 @@ require 'active_support/all'
 
 
   Time::DATE_FORMATS.merge!(
-      :my_date => lambda { |time|
+      :clavis_datepicker => lambda { |time|
 
         time.strftime("#{time.day.ordinalize} %b, %Y")
       },

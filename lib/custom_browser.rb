@@ -63,7 +63,7 @@ class CustomBrowser
     page_class = class_from_string(pageId)
 
     # Return Clavis page instance
-    page_class.new(pageId, @driver, @log, @site_url, scenario)
+    pageId != '' ? page_class.new(pageId, @driver, @log, @site_url, scenario) : nil
   end
 
   # Sets the timeout to find elements

@@ -20,6 +20,7 @@ require 'date'
 
 require_all 'lib'
 require_all 'fixtures'
+require_all 'config/initializers'
 
 $timeout = 1
 $element_timeout=2
@@ -58,4 +59,5 @@ end
 
 After do |scenario|
 
+  puts 'After sceneario is executed'
 end

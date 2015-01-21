@@ -42,13 +42,20 @@ module Common_functions
   def finished_all_ajax_requests?
     page.evaluate_script('jQuery.active').zero?
   end
-  # RSpec.configure do |config|
-  #   config.include wait_for_ajax, type: :feature
-  # end
 
   def class_from_string(str)
     str.split('::').inject(Object) do |mod, class_name|
       mod.const_get(class_name)
     end
+  end
+
+  def verify_loading_mask_hidden (timeout=20)
+
+    page.should have_css('#loading')
+    wait_for_ajax timeout
+    # noinspection RubyResolve
+    sleep 1 # give time to render the view
+    # noinspection RubyResolve
+    page.should have_no_css('#loading')
   end
 end
