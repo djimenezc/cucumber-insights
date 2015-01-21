@@ -5,18 +5,18 @@ module Common_functions
 
   $element_timeout=2
 
-  def wait_for_element(how, objObject, timeOut=$element_timeout)
+  def wait_for_element(how, obj, timeout=$element_timeout)
 
     begin
-      wait_for_it = Selenium::WebDriver::Wait.new(:timeout => timeOut)
+      wait_for_it = Selenium::WebDriver::Wait.new(:timeout => timeout)
       case how
         when 'content'
-          wait_for_it.until { page.driver.browser.find_element(:xpath, "//*[contains(text(),'#{objObject}')]").displayed? }
-          str_details = 'Content ' + objObject + ' found'
+          wait_for_it.until { page.driver.browser.find_element(:xpath, "//*[contains(text(),'#{obj}')]").displayed? }
+          str_details = 'Content ' + obj + ' found'
           puts str_details
         else
-          wait_for_it.until { page.driver.browser.find_element(how, objObject).displayed? }
-          str_details = 'Object ' + objObject + ' found'
+          wait_for_it.until { page.driver.browser.find_element(how, obj).displayed? }
+          str_details = 'Object ' + obj + ' found'
           puts str_details
       end
       sleep 5

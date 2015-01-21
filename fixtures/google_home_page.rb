@@ -1,6 +1,8 @@
 # @author Jonathan Chrisp
 class GoogleHomePage
+  # noinspection RubyResolve
   include DateHelper
+  # noinspection RubyResolve
   include DirectoryHelper
 
   attr_reader :name, :driver, :log
@@ -15,7 +17,8 @@ class GoogleHomePage
     @driver = driver
     @log		= log
 
-    @google_search_input = Element.new('google_search_input', :css, 'input[id="gbqfq"]', @driver, @log)
+    # noinspection RubyArgCount
+    @google_search_input = Clavis::Element.new('google_search_input', :css, 'input[id="gbqfq"]', @driver, @log)
   end
 
   # Verifies Elements for page
@@ -31,7 +34,7 @@ class GoogleHomePage
     @google_search_input.press_enter
 
     # Return instance of the Google Results Page
-    return GoogleResultsPage.new('google_results_page', @driver, @log)
+    GoogleResultsPage.new('google_results_page', @driver, @log)
   end
 
   # Verifies Google Search Input

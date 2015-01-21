@@ -32,7 +32,7 @@ class CustomBrowser
 
   # Deletes all cookies from the browser
   def delete_cookies
-    if (@browser_name != 'poltergeist')
+    if @browser_name != 'poltergeist'
       @log.info('Deleting the ' + @browser_name + ' browser cookies')
       @driver.manage.delete_all_cookies
     end
@@ -57,13 +57,13 @@ class CustomBrowser
   end
 
   # Opens clavis
-  def create_clavis_page(scenario, pageId)
+  def create_clavis_page(scenario, page_id)
     self.delete_cookies
 
-    page_class = class_from_string(pageId)
+    page_class = class_from_string(page_id)
 
     # Return Clavis page instance
-    pageId != '' ? page_class.new(pageId, @driver, @log, @site_url, scenario) : nil
+    page_id != '' ? page_class.new(page_id, @driver, @log, @site_url, scenario) : nil
   end
 
   # Sets the timeout to find elements
@@ -95,6 +95,7 @@ class CustomBrowser
   def start_browser(browser)
     @log.info('Starting the browser: ' + browser)
 
+    driver = nil
     browserstack_url = self.get_browserstack_url
     browserstack_capabilities = self.get_browser_capabilities
 
@@ -135,7 +136,7 @@ class CustomBrowser
               :js_errors => true,
               :timeout => 120,
               :debug => false,
-              :phantomjs_options => ['--load-images=no', '--disk-cache=false'],
+              :phantomjs_options => %w(--load-images=no --disk-cache=false),
               :inspector => true,
           }
           Capybara::Poltergeist::Driver.new(app, options)
@@ -143,7 +144,7 @@ class CustomBrowser
       else
         # Default to using chrome
         @log.info('Could not determine the browser to use so using chrome')
-        Selenium::WebDriver.for :chrome
+        driver = Selenium::WebDriver.for :chrome
     end
 
     RSpec.configure do |config|
@@ -163,9 +164,8 @@ class CustomBrowser
 
     username=ENV['BS_USERNAME'] ? ENV['BS_USERNAME'] : 'david1347'
     key=ENV['BS_AUTHKEY'] ? ENV['BS_AUTHKEY'] : 'ntnBqvSYwxip1XQUnPM7'
-    url = "http://#{username}:#{key}@hub.browserstack.com/wd/hub"
 
-    url
+    "http://#{username}:#{key}@hub.browserstack.com/wd/hub"
   end
 
   def get_browser_capabilities

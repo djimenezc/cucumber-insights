@@ -33,7 +33,7 @@ puts "Starting #{@browser_id} browser"
 
 browser = CustomBrowser.new(@browser_id, ENV['XPOSITION'], ENV['YPOSITION'], ENV['SCREENWIDTH'], ENV['SCREENHEIGHT'], @site_url)
 
-if (@browser_id != 'poltergeist')
+if @browser_id != 'poltergeist'
   browser.set_window_size(browser.screen_width, browser.screen_height)
   browser.move_browser(browser.x_position, browser.y_position)
   browser.delete_cookies
@@ -44,7 +44,7 @@ end
 Before do |scenario|
   # Create browser instance variable
   @browser = browser
-  scenario_title = scenario.respond_to?('title') ? scenario.title : scenario.scenario_outline.name;
+  scenario_title = scenario.respond_to?('title') ? scenario.title : scenario.scenario_outline.name
 
   browser.log.info('Starting the scenario: ' + "#{scenario_title}")
 end
@@ -52,7 +52,7 @@ end
 at_exit do
   puts 'Closing browser and session'
   browser.log.info('Quiting the browser at: ' + DateHelper.set_log_timestamp)
-  if (@browser_id != 'poltergeist')
+  if @browser_id != 'poltergeist'
     browser.driver.quit
   end
 end

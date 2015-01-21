@@ -1,6 +1,8 @@
 # @author Jonathan Chrisp
 class GoogleResultsPage
+  # noinspection RubyResolve
   include DateHelper
+  # noinspection RubyResolve
   include DirectoryHelper
 
   attr_reader :name, :driver, :log
@@ -15,7 +17,8 @@ class GoogleResultsPage
     @driver = driver
     @log		= log
 
-    @search_results_container = Element.new('search_results_container', :css, 'div[id="search"]', @driver, @log)
+    # noinspection RubyArgCount
+    @search_results_container = Clavis::Element.new('search_results_container', :css, 'div[id="search"]', @driver, @log)
 
   end
 

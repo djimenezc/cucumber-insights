@@ -1,4 +1,5 @@
 Given /^I have opened google$/ do
+  # noinspection RubyResolve
   @google_home_page = @browser.open_google
 end
 

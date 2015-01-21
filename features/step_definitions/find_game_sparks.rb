@@ -2,6 +2,7 @@ Given(/^I am on the Google homepage$/) do
   puts 'Browsing to google'
   visit 'http://www.google.co.uk'
 
+  # noinspection RubyResolve
   encoded_img = @browser.driver.screenshot_as(:base64)
   embed("data:image/png;base64,#{encoded_img}",'image/png')
 end
@@ -13,7 +14,9 @@ end
 
 Then(/^I should see "(.*?)"$/) do |expectedText|
   puts 'Checking the search result'
+  # noinspection RubyResolve
   page.should have_content(expectedText)
+  # noinspection RubyResolve
   encoded_img = @browser.driver.screenshot_as(:base64)
   embed("data:image/png;base64,#{encoded_img}",'image/png')
 end
