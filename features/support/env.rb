@@ -31,6 +31,9 @@ $element_timeout=2
 
 puts "Starting #{@browser_id} browser"
 
+Dir.mkdir('logs')
+Dir.mkdir('reports')
+
 browser = CustomBrowser.new(@browser_id, ENV['XPOSITION'], ENV['YPOSITION'], ENV['SCREENWIDTH'], ENV['SCREENHEIGHT'], @site_url)
 
 if @browser_id != 'poltergeist'
