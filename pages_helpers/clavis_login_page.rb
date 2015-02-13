@@ -20,9 +20,9 @@ class ClavisHomePage
     @datepicker_info = nil
   end
 
-  def open_clavis_home_page(usernameLabel)
+  def open_clavis_home_page(username_label)
 
-    if (usernameLabel == 'General Mills US')
+    if username_label == 'General Mills US'
       username = 'general_mills_us@clavistechnology.com'
       password = 'Testing!500'
     else

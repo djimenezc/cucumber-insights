@@ -19,7 +19,7 @@ require File.expand_path('../Common_Lib', __FILE__) #require
 require 'date'
 
 require_all 'lib'
-require_all 'fixtures'
+require_all 'pages_helpers'
 require_all 'config/initializers'
 
 $timeout = 1
