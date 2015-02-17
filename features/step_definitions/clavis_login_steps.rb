@@ -1,3 +1,6 @@
+# noinspection RubyResolve
+include Common_functions
+
 # Actions performed before each scenario
 Before do |scenario|
 

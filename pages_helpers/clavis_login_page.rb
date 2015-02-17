@@ -20,9 +20,9 @@ class ClavisHomePage
     @datepicker_info = nil
   end
 
-  def open_clavis_home_page(usernameLabel)
+  def open_clavis_home_page(username_label)
 
-    if (usernameLabel == 'General Mills US')
+    if username_label == 'General Mills US'
       username = 'general_mills_us@clavistechnology.com'
       password = 'Testing!800'
     elsif (usernameLabel == 'KCC US')
@@ -42,12 +42,13 @@ class ClavisHomePage
   def get_datepicker_info
 
     previous_month = Date.today.mon - 2
-    previous_month_year = Date.today.mon - 2 > 0 ? Date.today.year : Date.today.year - 1
+    previous_month_year = Date.today.mon - 2 >= 0 ? Date.today.year : Date.today.year - 1
     current_month = Date.today.mon - 1
     next_month_year = Date.today.mon != 12 ? Date.today.year : Date.today.year + 1
 
     to_date_formatted = Time.now.to_s(:clavis_datepicker)
-    from_date_formatted = Time.new(2014, 12, 24).to_s(:clavis_datepicker)
+    one_month_ago = Time.now - (28 * 24 * 60 *60)
+    from_date_formatted = one_month_ago.to_s(:clavis_datepicker)
 
     if @datepicker_info == nil
       @datepicker_info = DateObject.new(previous_month, previous_month_year, current_month, next_month_year, to_date_formatted, from_date_formatted)
