@@ -40,6 +40,9 @@ end
 
 Then(/^I am in the main page "(.*?)"$/) do |usernameLabel|
   embed_image
+
+  verify_loading_mask_hidden 25
+
   # noinspection RubyResolve
   page.should have_content(usernameLabel)
   # noinspection RubyResolve

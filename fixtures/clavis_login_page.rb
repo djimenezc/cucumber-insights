@@ -24,7 +24,10 @@ class ClavisHomePage
 
     if (usernameLabel == 'General Mills US')
       username = 'general_mills_us@clavistechnology.com'
-      password = 'Testing!500'
+      password = 'Testing!800'
+    elsif (usernameLabel == 'KCC US')
+      username = 'kcc_us@clavisinsight.com'
+      password = 'Testing!800'
     else
       username = 'kcc_us_test2@clavisinsight.com'
       password = 'Testing!700'
