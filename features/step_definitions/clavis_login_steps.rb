@@ -59,13 +59,15 @@ end
 
 Given(/^I log in Clavis homepage as KCC US 2$/) do
   step 'I log in Clavis homepage as "KCC US"'
-  step 'I am in the main page "KCC TEST USER"'
+  step 'I am in the main page "KCC US"'
 end
 
 Given(/^I am in the executive login page$/) do
   visit "#{@clavis_home_page.url}#executive"
 
-  verify_loading_mask_hidden 25
+  # verify_loading_mask_hidden 25
+  # in some env the loading mask is display too fast
+  sleep 2
 
   page.should have_css('#pageTitle', :text => 'Executive Dashboard')
 
@@ -182,7 +184,7 @@ Then(/^Uncheck categories$/) do
   verify_loading_mask_hidden 25
 
   page.first('.filter_summary').click
-  wait_for_ajax 25
+  wait_for_ajax 30
 
   embed_image 'Dashboard after the dimension filter were applied'
 end

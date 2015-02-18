@@ -29,7 +29,7 @@ $element_timeout=2
 @browser_id = ENV['CONTROLLER'] ? ENV['CONTROLLER'] : 'firefox'
 @site_url = ENV['URL'] ? ENV['URL'] : 'http://all-ei-dev.elasticbeanstalk.com/'
 
-puts "Starting #{@browser_id} browser"
+puts "Starting #{@browser_id} browser #{ENV['URL']}"
 
 Dir.mkdir('logs') unless File.exists?('logs')
 Dir.mkdir('reports') unless File.exists?('reports')

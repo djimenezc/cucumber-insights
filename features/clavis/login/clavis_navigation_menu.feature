@@ -10,7 +10,7 @@ Feature: Verify executive dashboard
   @do-thing-1
   Scenario: Changing the datepicker filter applied to the page
     Given I log in Clavis homepage as "KCC US"
-    And I am in the main page "KCC TEST USER"
+    And I am in the main page "KCC US"
     And I am in the executive login page
     And Date picker date label is correct
     Then Change the filter date range to '2014-05-01' from '2014-05-01'
