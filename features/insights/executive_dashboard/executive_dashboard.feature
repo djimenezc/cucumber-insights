@@ -12,9 +12,15 @@ Feature: Verify executive dashboard panels links
     And Back to the previous page
     And I am in the executive login page
     Then Verify all the executive panels are displayed
-    And Click "imaging_panel" panel
-    And Verify title is "Image Accuracy"
-    And Verify subTitle is "Comparison Overview"
+    And Click "search_rankings_panel" panel
+    And Verify title is "Search Rankings"
+    And Verify subTitle is "Search Scores"
+    And Back to the previous page
+    And I am in the executive login page
+    Then Verify all the executive panels are displayed
+    And Click "share_of_search_rankings_panel" panel
+    And Verify title is "Search Rankings"
+    And Verify subTitle is "Share Of Search"
     And Back to the previous page
     And I am in the executive login page
     Then Verify all the executive panels are displayed
