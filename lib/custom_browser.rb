@@ -28,6 +28,7 @@ class CustomBrowser
     @screen_width = screen_width
     @screen_height = screen_height
     @site_url = site_url
+
   end
 
   # Deletes all cookies from the browser
@@ -129,6 +130,12 @@ class CustomBrowser
         else
           raise 'You can\'t run IOS tests on non-mac machine'
         end
+      when 'selenium'
+        driver = :selenium
+        require 'headless'
+
+        headless = Headless.new
+        headless.start
       when 'poltergeist'
         driver = :poltergeist
         Capybara.register_driver :poltergeist do |app|
