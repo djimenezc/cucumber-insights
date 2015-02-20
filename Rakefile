@@ -7,20 +7,29 @@ task default: %w[features]
 
 # namespace :features do
 
-  # task :test do
+# task :test do
 
-ENV['CONTROLLER'] = 'chrome'
+ENV['CONTROLLER'] = ENV['CONTROLLER'] ? ENV['CONTROLLER'] : 'chrome'
 
-    puts 'Starting features testing'
+task :features do |t|
 
-    Cucumber::Rake::Task.new(:features) do |t|
-      # t.profile = 'webrat'
-      t.cucumber_opts = 'features --format html --out reports/report.html --format pretty '
-      puts 'hello cucumber'
-    end
+  unless ARGV[1].nil? || ARGV[1].include?('tags=')
+    tags = ARGV[1].gsub(/.+=/, '')
+  end
 
-    puts 'Exiting features testing'
-  # end
+  puts "Running task #{t} with tags: #{tags}"
+
+  Cucumber::Rake::Task.new(:features) do |t|
+
+    # t.profile = 'webrat'
+    t.cucumber_opts = %w(features --format html --out reports/report.html --format pretty)
+
+    t.cucumber_opts.push('--tags', tags) unless tags.nil?
+  end
+end
+
+puts 'Exiting features testing'
+# end
 
 # end
 #

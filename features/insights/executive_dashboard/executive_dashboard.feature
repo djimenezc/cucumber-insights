@@ -1,6 +1,6 @@
 Feature: Verify executive dashboard panels links
 
-  @do-thing-1
+  @do-thing-1 @l2
   Scenario: Click through all the panels displayed in the executive dashboard report
     Given I log in Clavis homepage as "KCC US"
     And I am in the main page "KCC US"
