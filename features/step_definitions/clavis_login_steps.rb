@@ -18,6 +18,7 @@ end
 
 When(/^I click the clavis log in button$/) do
   embed_image
+  sleep 2
   click_button 'login'
 end
 
