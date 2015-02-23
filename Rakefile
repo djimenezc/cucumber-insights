@@ -13,7 +13,7 @@ ENV['CONTROLLER'] = ENV['CONTROLLER'] ? ENV['CONTROLLER'] : 'chrome'
 
 task :features do |t|
 
-  unless ARGV[1].nil? || ARGV[1].include?('tags=')
+  unless ARGV[1].nil? || !ARGV[1].include?('tags=')
     tags = ARGV[1].gsub(/.+=/, '')
   end
 
