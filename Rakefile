@@ -2,12 +2,7 @@ require 'rubygems'
 require 'cucumber'
 require 'cucumber/rake/task'
 
-
 task default: %w[features]
-
-# namespace :features do
-
-# task :test do
 
 ENV['CONTROLLER'] = ENV['CONTROLLER'] ? ENV['CONTROLLER'] : 'chrome'
 
@@ -28,11 +23,6 @@ task :features do |t|
   end
 end
 
-puts 'Exiting features testing'
-# end
-
-# end
-#
 begin
 
 rescue LoadError
@@ -41,5 +31,3 @@ rescue LoadError
     abort 'Cucumber rake task is not available. Be sure to install cucumber as a gem or plugin'
   end
 end
-
-# task :features => 'test'
