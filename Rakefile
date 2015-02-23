@@ -12,7 +12,8 @@ task :features do |t|
     tags = ARGV[1].gsub(/.+=/, '')
   end
 
-  puts "Running task #{t} with tags: #{tags}"
+  puts "Running task #{t} with tags: #{# noinspection RubyScope
+       tags}"
 
   Cucumber::Rake::Task.new(:features) do |t|
 

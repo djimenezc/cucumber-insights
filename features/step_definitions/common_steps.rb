@@ -1,3 +1,22 @@
+# Actions performed before each scenario
+Before do |scenario|
+
+  page_id = ''
+
+  if scenario.source_tag_names.include? '@do-thing-1'
+    # @browser.send("create_#{@tag}_page", self)
+    page_id = 'ClavisHomePage';
+  elsif scenario.source_tag_names.include? 'do-thing-2'
+
+  end
+
+  # noinspection RubyResolve
+  @clavis_home_page = @browser.create_clavis_page(self, page_id)
+
+  # noinspection RubyResolve
+  @browser.log.info('Instancing clavis page')
+end
+
 Then(/^Back to the previous page$/) do
   page.evaluate_script('window.history.back()')
 end

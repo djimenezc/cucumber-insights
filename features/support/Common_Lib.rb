@@ -51,7 +51,8 @@ module Common_functions
 
   def verify_loading_mask_hidden (timeout=20)
 
-    page.should have_css('#loading')
+    #in some environments the loading mask is displayed too fast
+    # page.should have_css('#loading')
     wait_for_ajax timeout
     # noinspection RubyResolve
     sleep 1 # give time to render the view
