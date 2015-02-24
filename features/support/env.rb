@@ -23,7 +23,7 @@ require_all 'pages_helpers'
 require_all 'config/initializers'
 
 $timeout = 1
-$element_timeout=2
+$element_timeout=10
 
 # Setup Browser
 @browser_id = ENV['CONTROLLER'] ? ENV['CONTROLLER'] : 'firefox'
@@ -43,6 +43,12 @@ if @browser_id != 'poltergeist'
   browser.set_timeout($timeout, $element_timeout)
 end
 
+@metadata_username = ENV['METADATA_USERNAME'] ? ENV['METADATA_USERNAME'] : 'user'
+@metadata_password = ENV['METADATA_PASSWORD'] ? ENV['METADATA_PASSWORD'] : 'password'
+@metadata_url = ENV['METADATA_URL'] ? ENV['METADATA_URL'] : 'user'
+
+metadata = Metadata.new(@metadata_username, @metadata_password, @metadata_url)
+
 # Actions performed before each scenario
 Before do |scenario|
   # Create browser instance variable
@@ -50,6 +56,8 @@ Before do |scenario|
   scenario_title = scenario.respond_to?('title') ? scenario.title : scenario.scenario_outline.name
 
   browser.log.info('Starting the scenario: ' + "#{scenario_title}")
+
+  @metadata = metadata
 end
 
 at_exit do

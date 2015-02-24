@@ -5,25 +5,25 @@ module Common_functions
 
   $element_timeout=2
 
-  def wait_for_element(how, obj, timeout=$element_timeout)
-
-    begin
-      wait_for_it = Selenium::WebDriver::Wait.new(:timeout => timeout)
-      case how
-        when 'content'
-          wait_for_it.until { page.driver.browser.find_element(:xpath, "//*[contains(text(),'#{obj}')]").displayed? }
-          str_details = 'Content ' + obj + ' found'
-          puts str_details
-        else
-          wait_for_it.until { page.driver.browser.find_element(how, obj).displayed? }
-          str_details = 'Object ' + obj + ' found'
-          puts str_details
-      end
-      sleep 5
-    rescue Exception => e
-      puts e
-    end
-  end
+  # def wait_for_element(how, obj, timeout=$element_timeout)
+  #
+  #   begin
+  #     wait_for_it = Selenium::WebDriver::Wait.new(:timeout => timeout)
+  #     case how
+  #       when 'content'
+  #         wait_for_it.until { page.driver.browser.find_element(:xpath, "//*[contains(text(),'#{obj}')]").displayed? }
+  #         str_details = 'Content ' + obj + ' found'
+  #         puts str_details
+  #       else
+  #         wait_for_it.until { page.driver.browser.find_element(how, obj).displayed? }
+  #         str_details = 'Object ' + obj + ' found'
+  #         puts str_details
+  #     end
+  #     sleep 5
+  #   rescue Exception => e
+  #     puts e
+  #   end
+  # end
 
   def embed_image(image_title='SCREENSHOT')
     encoded_img = @browser.driver.screenshot_as(:base64)
@@ -55,7 +55,7 @@ module Common_functions
     # page.should have_css('#loading')
     wait_for_ajax timeout
     # noinspection RubyResolve
-    sleep 1 # give time to render the view
+
     # noinspection RubyResolve
     page.should have_no_css('#loading')
   end

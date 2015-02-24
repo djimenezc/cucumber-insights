@@ -52,8 +52,6 @@ Given(/^I am in the executive login page$/) do
 
   # verify_loading_mask_hidden 25
   # in some env the loading mask is display too fast
-  sleep 2
-
   page.should have_css('#pageTitle', :text => 'Executive Dashboard')
 
   embed_image

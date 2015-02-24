@@ -8,6 +8,7 @@ And(/^I go to the search scores page$/) do
 end
 
 Given(/^I configure the priority search toggle to be on by default$/) do
+  @metdata.post_config
   jsToRun = <<-eos
     sessionModel.set('onlyPrioritySearchTerms', "1");
   eos
