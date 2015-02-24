@@ -8,17 +8,21 @@ end
 
 When(/^I type the userName "(.*?)"$/) do |username|
   fill_in 'user_email', :with => username
+  @browser.log.info "Typing username: #{username}"
 end
 
 
 When(/^I type the password "(.*?)"$/) do |password|
   fill_in 'user_password', :with => password
+  @browser.log.info "Typing password: #{password}"
 end
 
 
 When(/^I click the clavis log in button$/) do
   embed_image
-  sleep 2
+
+  @browser.log.info "logging in with username: #{find('#user_email').value} password: #{find('#user_password').value}"
+
   click_button 'login'
 end
 

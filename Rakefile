@@ -15,7 +15,7 @@ task :features do |t|
   end
 
   puts "Running task #{t} with tags: #{# noinspection RubyScope
-       tags} format: #{ENV['FORMAT']} output: #{'OUTPUT'}"
+       tags} format: #{ENV['FORMAT']} output: #{OUTPUT}"
 
 
   Cucumber::Rake::Task.new(:features) do |t|
