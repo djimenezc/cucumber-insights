@@ -5,6 +5,8 @@ require 'cucumber/rake/task'
 task default: %w[features]
 
 ENV['CONTROLLER'] = ENV['CONTROLLER'] ? ENV['CONTROLLER'] : 'chrome'
+ENV['FORMAT'] = ENV['FORMAT'] ? ENV['FORMAT'] : 'html'
+OUTPUT = "reports/report.#{ENV['FORMAT']}"
 
 task :features do |t|
 
@@ -13,12 +15,12 @@ task :features do |t|
   end
 
   puts "Running task #{t} with tags: #{# noinspection RubyScope
-       tags}"
+       tags} format: #{ENV['FORMAT']} output: #{'OUTPUT'}"
+
 
   Cucumber::Rake::Task.new(:features) do |t|
 
-    # t.profile = 'webrat'
-    t.cucumber_opts = %w(features --format html --out reports/report.html --format pretty)
+    t.cucumber_opts = ['features', '--format', ENV['FORMAT'], '--out', OUTPUT, '--format', 'pretty']
 
     t.cucumber_opts.push('--tags', tags) unless tags.nil?
   end
