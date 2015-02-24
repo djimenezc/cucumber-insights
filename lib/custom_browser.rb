@@ -48,15 +48,6 @@ class CustomBrowser
     @driver.manage.window.move_to(x_position, y_position)
   end
 
-  # Opens google
-  def open_google
-    self.delete_cookies
-    @driver.navigate.to('http://www.google.co.uk')
-
-    # Return GoogleHome page instance
-    GoogleHomePage.new('GoogleHomePage', @driver, @log)
-  end
-
   # Opens clavis
   def create_clavis_page(scenario, page_id)
     self.delete_cookies

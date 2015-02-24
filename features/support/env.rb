@@ -55,7 +55,9 @@ end
 at_exit do
   puts 'Closing browser and session'
   browser.log.info('Quiting the browser at: ' + DateHelper.set_log_timestamp)
-  if ENV['BROWSERSTACK'] != 'true' && @browser_id != 'poltergeist'
+
+  # if ENV['BROWSERSTACK'] != 'true' && @browser_id != 'poltergeist'
+  if @browser_id == 'chrome'
     browser.driver.quit
   end
 end
