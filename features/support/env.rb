@@ -8,14 +8,14 @@ require 'capybara/cucumber'
 require 'capybara/poltergeist'
 require 'rspec'
 require 'selenium-webdriver'
-# require 'test/unit/assertions'
+require File.expand_path('../../../lib/fast_selenium', __FILE__) if ENV['BROWSERSTACK'] == 'true'
 require 'minitest/autorun'
 require 'cucumber'
 require 'xmlsimple'
 require 'net/http'
 require 'nokogiri'
 require 'require_all'
-require File.expand_path('../Common_Lib', __FILE__) #require
+require File.expand_path('../Common_Lib', __FILE__)
 require 'date'
 
 require_all 'lib'
@@ -29,7 +29,7 @@ $element_timeout=2
 @browser_id = ENV['CONTROLLER'] ? ENV['CONTROLLER'] : 'firefox'
 @site_url = ENV['URL'] ? ENV['URL'] : 'http://all-ei-dev.elasticbeanstalk.com/'
 
-puts "Starting #{@browser_id} browser #{ENV['URL']}"
+puts "Starting #{@browser_id} browser #{@site_url}"
 
 Dir.mkdir('logs') unless File.exists?('logs')
 Dir.mkdir('reports') unless File.exists?('reports')

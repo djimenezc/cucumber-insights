@@ -106,7 +106,11 @@ class CustomBrowser
       when 'firefox'
         Capybara.configure do |capybara|
           capybara.register_driver :selenium_ff do |app|
-            Capybara::Selenium::Driver.new(app, :browser => :firefox)
+            if ENV['BROWSERSTACK'] && ENV['BROWSERSTACK'] == 'true'
+              Capybara::Selenium::Driver.new(app, :browser => :firefox, :url => browserstack_url, :desired_capabilities => browserstack_capabilities)
+            else
+              Capybara::Selenium::Driver.new(app, :browser => :firefox)
+            end
           end
 
         end
