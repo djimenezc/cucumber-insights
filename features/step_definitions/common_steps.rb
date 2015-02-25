@@ -4,8 +4,8 @@ Before do |scenario|
   if scenario.source_tag_names.include? '@do-thing-1'
     # @browser.send("create_#{@tag}_page", self)
     page_id = 'ClavisHomePage';
-  elsif scenario.source_tag_names.include? 'portfolio-availability'
-    page_id = 'PortfolioAvailability'
+  elsif scenario.source_tag_names.include? '@portfolio-availability'
+    page_id = 'PortfolioAvailabilityPage'
   else
     page_id='BasePage'
   end
@@ -15,6 +15,16 @@ Before do |scenario|
 
   # noinspection RubyResolve
   @browser.log.info('Instancing clavis page')
+end
+
+Then(/^Check panel scores of "(.*?)" panel$/) do |panel_id|
+  @insights_page.score = page.find("##{panel_id} .percent").text
+  # noinspection RubyResolve
+  @browser.log.debug "Keep #{@insights_page.score} as score of #{panel_id}"
+end
+
+Then(/^Verify report score matches the scorecard score$/) do
+  @insights_page.score.should eq(page.find('.total-panel.panel-body.text-center svg .highcharts-title > tspan').text.split('%')[0])
 end
 
 Then(/^Back to the previous page$/) do
