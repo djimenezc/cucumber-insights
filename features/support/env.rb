@@ -45,7 +45,7 @@ end
 
 @metadata_username = ENV['METADATA_USERNAME'] ? ENV['METADATA_USERNAME'] : 'user'
 @metadata_password = ENV['METADATA_PASSWORD'] ? ENV['METADATA_PASSWORD'] : 'password'
-@metadata_url = ENV['METADATA_URL'] ? ENV['METADATA_URL'] : 'user'
+@metadata_url = ENV['METADATA_URL'] ? ENV['METADATA_URL'] : 'http://localhost:5000'
 
 metadata = Metadata.new(@metadata_username, @metadata_password, @metadata_url)
 
