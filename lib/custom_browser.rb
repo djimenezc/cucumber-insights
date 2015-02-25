@@ -190,6 +190,8 @@ class CustomBrowser
     capabilities['browserstack.debug'] = 'true'
     capabilities['name'] = 'Testing Insights Login Page'
 
+    @log.info "BrowserStack capabilities project: #{capabilities['project']} OS: #{capabilities['os']} platform: #{capabilities['platform']}"
+
     capabilities
   end
 end
