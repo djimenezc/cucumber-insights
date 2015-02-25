@@ -164,8 +164,8 @@ class CustomBrowser
 
   def get_browserstack_url
 
-    username=ENV['BS_USERNAME'] ? ENV['BS_USERNAME'] : 'david1347'
-    key=ENV['BS_AUTHKEY'] ? ENV['BS_AUTHKEY'] : 'ntnBqvSYwxip1XQUnPM7'
+    username=ENV['BS_USERNAME'] ? ENV['BS_USERNAME'] : CONFIG['BS_USERNAME']
+    key=ENV['BS_AUTHKEY'] ? ENV['BS_AUTHKEY'] : CONFIG['BS_AUTHKEY']
 
     "http://#{username}:#{key}@hub.browserstack.com/wd/hub"
   end

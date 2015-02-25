@@ -8,7 +8,15 @@ And(/^I go to the search scores page$/) do
 end
 
 Given(/^I configure the priority search toggle to be on by default$/) do
-  @metadata.post_config("/customers", {})
+
+  customer_id = 3
+  config = {
+      'description' => 'i am another description',
+      'sort_order' => '4'
+  }
+
+  @metadata.set_customer_data(customer_id, config)
+
   jsToRun = <<-eos
     sessionModel.set('onlyPrioritySearchTerms', "1");
   eos

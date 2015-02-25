@@ -25,9 +25,12 @@ require_all 'config/initializers'
 $timeout = 1
 $element_timeout=10
 
+#load the config file
+CONFIG = YAML.load_file('config/config.yml')
+
 # Setup Browser
-@browser_id = ENV['CONTROLLER'] ? ENV['CONTROLLER'] : 'firefox'
-@site_url = ENV['URL'] ? ENV['URL'] : 'http://all-ei-dev.elasticbeanstalk.com/'
+@browser_id = ENV['CONTROLLER'] ? ENV['CONTROLLER'] : CONFIG['CONTROLLER']
+@site_url = ENV['URL'] ? ENV['URL'] : CONFIG['URL']
 
 puts "Starting #{@browser_id} browser #{@site_url}"
 
@@ -43,9 +46,9 @@ if @browser_id != 'poltergeist'
   browser.set_timeout($timeout, $element_timeout)
 end
 
-@metadata_username = ENV['METADATA_USERNAME'] ? ENV['METADATA_USERNAME'] : 'user'
-@metadata_password = ENV['METADATA_PASSWORD'] ? ENV['METADATA_PASSWORD'] : 'password'
-@metadata_url = ENV['METADATA_URL'] ? ENV['METADATA_URL'] : 'http://localhost:5000'
+@metadata_url = ENV['METADATA_URL'] ? ENV['METADATA_URL'] : CONFIG['METADATA_URL']
+@metadata_username = ENV['METADATA_USERNAME'] ? ENV['METADATA_USERNAME'] : CONFIG['METADATA_USERNAME']
+@metadata_password = ENV['METADATA_PASSWORD'] ? ENV['METADATA_PASSWORD'] : CONFIG['METADATA_PASSWORD']
 
 metadata = Metadata.new(@metadata_username, @metadata_password, @metadata_url)
 
