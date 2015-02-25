@@ -61,10 +61,13 @@ Before do |scenario|
 end
 
 at_exit do
-  puts 'Closing browser and session'
-  browser.log.info('Quiting the browser at: ' + DateHelper.set_log_timestamp)
+
+  puts 'at_exit'
+  browser.log.info 'at_exit'
 
   if @browser_id == 'chrome' && ENV['BROWSERSTACK'] != 'true'
+    browser.log.info('Quiting the browser at: ' + DateHelper.set_log_timestamp)
+    puts 'Closing browser and session'
     browser.driver.quit
   end
 end
