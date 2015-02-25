@@ -3,7 +3,7 @@ include Common_functions
 
 Given(/^I am on the Clavis login homepage$/) do
 
-  visit @clavis_home_page.url
+  visit @insights_page.url
 end
 
 When(/^I type the userName "(.*?)"$/) do |username|
@@ -39,7 +39,7 @@ end
 
 Given(/^I log in Clavis homepage as "(.*?)"$/) do |usernameLabel|
 
-  @clavis_home_page.open_clavis_home_page(usernameLabel)
+  @insights_page.open_clavis_home_page(usernameLabel)
 end
 
 Given(/^I log in Clavis homepage as KCC US 2$/) do
@@ -48,7 +48,7 @@ Given(/^I log in Clavis homepage as KCC US 2$/) do
 end
 
 Given(/^I am in the executive login page$/) do
-  visit "#{@clavis_home_page.url}#executive"
+  visit "#{@insights_page.url}#executive"
 
   # verify_loading_mask_hidden 25
   # in some env the loading mask is display too fast
@@ -73,7 +73,7 @@ end
 
 Given(/^Date picker date label is correct$/) do | |
 
-  datepicker_info = @clavis_home_page.get_datepicker_info
+  datepicker_info = @insights_page.get_datepicker_info
   datepicker_text = "#{datepicker_info.from_date_formatted} - #{datepicker_info.to_date_formatted}"
 
   puts "date picker text expected #{datepicker_text}"
@@ -87,13 +87,13 @@ Then(/^Change the filter date range to '(\d+)\-(\d+)\-(\d+)' from '(\d+)\-(\d+)\
 
   page.first('.date-range-field').click
 
-  datepicker_info = @clavis_home_page.get_datepicker_info
+  datepicker_info = @insights_page.get_datepicker_info
   # noinspection RubyResolve
-  page.should have_content("#{@clavis_home_page.month_array[datepicker_info.previous_month]}, #{datepicker_info.previous_month_year}")
+  page.should have_content("#{@insights_page.month_array[datepicker_info.previous_month]}, #{datepicker_info.previous_month_year}")
   # noinspection RubyResolve
-  page.should have_content("#{@clavis_home_page.month_array[datepicker_info.current_month]}, #{Date.today.year}")
+  page.should have_content("#{@insights_page.month_array[datepicker_info.current_month]}, #{Date.today.year}")
   # noinspection RubyResolve
-  page.should have_content("#{@clavis_home_page.month_array[Date.today.mon]}, #{datepicker_info.next_month_year}")
+  page.should have_content("#{@insights_page.month_array[Date.today.mon]}, #{datepicker_info.next_month_year}")
 
   embed_image 'After date picker is clicked'
 
@@ -105,13 +105,13 @@ Then(/^Change the filter date range to '(\d+)\-(\d+)\-(\d+)' from '(\d+)\-(\d+)\
 
   previous_month_year = Date.today.mon - 3 > 0 ? Date.today.year : Date.today.year - 1
   # noinspection RubyResolve
-  page.should have_content("#{@clavis_home_page.month_array[Date.today.mon - 3]}, #{previous_month_year}")
+  page.should have_content("#{@insights_page.month_array[Date.today.mon - 3]}, #{previous_month_year}")
   previous_month_year = Date.today.mon - 4 > 0 ? Date.today.year : Date.today.year - 1
   # noinspection RubyResolve
-  page.should have_content("#{@clavis_home_page.month_array[Date.today.mon - 4]}, #{previous_month_year}")
+  page.should have_content("#{@insights_page.month_array[Date.today.mon - 4]}, #{previous_month_year}")
   previous_month_year = Date.today.mon - 5 > 0 ? Date.today.year : Date.today.year - 1
   # noinspection RubyResolve
-  page.should have_content("#{@clavis_home_page.month_array[Date.today.mon - 5]}, #{previous_month_year}")
+  page.should have_content("#{@insights_page.month_array[Date.today.mon - 5]}, #{previous_month_year}")
 
   page.first('.datepickerSaturday.selectableDate').click
 
@@ -125,7 +125,7 @@ Then(/^Verify that the date picker filter is applied$/) do
   page.first('.date-range-field').click
 
   # noinspection RubyResolve
-  page.should have_content("#{@clavis_home_page.month_array[@clavis_home_page.get_datepicker_info.current_month]}, #{Date.today.year}")
+  page.should have_content("#{@insights_page.month_array[@insights_page.get_datepicker_info.current_month]}, #{Date.today.year}")
 
   embed_image 'The date picker shows the new selected range'
 
