@@ -1,6 +1,9 @@
 
 
 
+
+
+
 Run parallel test with headless driver with profile all:
 CONTROLLER=selenium parallel_cucumber -n 3 features -o '-p all'
 
