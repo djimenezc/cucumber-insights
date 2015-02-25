@@ -3,17 +3,21 @@ include Common_functions
 
 Given(/^I am on the Clavis login homepage$/) do
 
+  # noinspection RubyResolve
   visit @insights_page.url
 end
 
 When(/^I type the userName "(.*?)"$/) do |username|
   fill_in 'user_email', :with => username
+  # noinspection RubyResolve
   @browser.log.info "Typing username: #{username}"
 end
 
 
 When(/^I type the password "(.*?)"$/) do |password|
+
   fill_in 'user_password', :with => password
+  # noinspection RubyResolve
   @browser.log.info "Typing password: #{password}"
 end
 
@@ -21,6 +25,7 @@ end
 When(/^I click the clavis log in button$/) do
   embed_image
 
+  # noinspection RubyResolve
   @browser.log.info "logging in with username: #{find('#user_email').value} password: #{find('#user_password').value}"
 
   click_button 'login'
@@ -87,6 +92,7 @@ Then(/^Change the filter date range to '(\d+)\-(\d+)\-(\d+)' from '(\d+)\-(\d+)\
 
   page.first('.date-range-field').click
 
+  # noinspection RubyResolve
   datepicker_info = @insights_page.get_datepicker_info
   # noinspection RubyResolve
   page.should have_content("#{@insights_page.month_array[datepicker_info.previous_month]}, #{datepicker_info.previous_month_year}")

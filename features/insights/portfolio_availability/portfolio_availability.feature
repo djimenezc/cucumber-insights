@@ -1,12 +1,21 @@
 Feature: Verify executive dashboard panels links
 
+#  @portfolio-availability @l1
+#  Scenario: Verify that the score for the portfolio availability are correct
+#    Given I log in Clavis homepage as "KCC US"
+#    And I am in the main page "KCC US"
+#    And I am in the executive login page
+#    And Check panel scores of "portfolio_availability_panel" panel
+#    And Click "portfolio_availability_panel" panel
+#    Then Verify title is "Portfolio Availability"
+#    And Verify report score matches the scorecard score
+
   @portfolio-availability @l1
-  Scenario: Click through all the panels displayed in the executive dashboard report
+  Scenario: Verify portfolio availability over time panel
     Given I log in Clavis homepage as "KCC US"
     And I am in the main page "KCC US"
-    And I am in the executive login page
-    And Check panel scores of "portfolio_availability_panel" panel
-    And Click "portfolio_availability_panel" panel
+    And Click menu item "portfolio_availability_menu_item"
+    And Click menu item "portfolio_availability_summary_menu_item"
     Then Verify title is "Portfolio Availability"
-    And Verify report score matches the scorecard score
+    And Verify overtime panel is displayed
 

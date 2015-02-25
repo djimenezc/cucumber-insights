@@ -17,6 +17,10 @@ Before do |scenario|
   @browser.log.info('Instancing clavis page')
 end
 
+Then(/Click menu item "(.*?)"$/) do |link_id|
+  page.find("##{link_id}").click
+end
+
 Then(/^Check panel scores of "(.*?)" panel$/) do |panel_id|
   @insights_page.score = page.find("##{panel_id} .percent").text
   # noinspection RubyResolve
