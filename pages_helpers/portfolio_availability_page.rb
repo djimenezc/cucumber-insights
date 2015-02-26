@@ -29,8 +29,8 @@ class PortfolioAvailabilityPage < BasePage
     self.wait_delay
   end
 
-  def wait_delay
-    sleep DELAY
+  def wait_delay (delay= DELAY)
+    sleep delay
   end
 
   def overtime_stripes
@@ -48,4 +48,8 @@ class PortfolioAvailabilityPage < BasePage
     panel.all('.highcharts-series-group > .highcharts-series[visibility=visible]')
   end
 
+  def get_online_bar_rows
+
+    self.by_online_store_panel.all('.highcharts-series.highcharts-tracker')
+  end
 end

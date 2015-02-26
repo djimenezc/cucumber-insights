@@ -28,4 +28,8 @@ Feature: Verify executive dashboard panels links
     And Click menu item "portfolio_availability_summary_menu_item"
     Then Verify panel by online store is displayed
     And Click over the legend buttons in the panel by Online Store
+    And Mouse over the bar "0" in the panel by Online Store
+    And Display product count of bar "0" in the overtime panel
+    And Mouse over the bar "1" in the panel by Online Store
+    And Display product count of bar "1" in the overtime panel
 

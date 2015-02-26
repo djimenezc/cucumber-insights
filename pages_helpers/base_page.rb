@@ -36,4 +36,8 @@ class BasePage
     @scenario.click_button 'login'
   end
 
+  def back_previous_page
+    page.evaluate_script('window.history.back()')
+  end
+
 end
