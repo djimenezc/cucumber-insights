@@ -1,7 +1,7 @@
 # @author David Jimenez
 class PortfolioAvailabilityPage < BasePage
 
-  attr_accessor :score, :overtime_panel
+  attr_accessor :score, :overtime_panel, :by_online_store_panel
 
   def click_on_legend (text)
 
