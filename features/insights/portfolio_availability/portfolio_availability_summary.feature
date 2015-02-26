@@ -18,4 +18,5 @@ Feature: Verify executive dashboard panels links
     And Click menu item "portfolio_availability_summary_menu_item"
     Then Verify title is "Portfolio Availability"
     And Verify overtime panel is displayed
+    And Click over the overtime legend buttons
 
