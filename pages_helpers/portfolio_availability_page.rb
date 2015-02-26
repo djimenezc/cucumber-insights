@@ -9,4 +9,9 @@ class PortfolioAvailabilityPage < BasePage
     in_stock_legend_button.should_not nil?
     in_stock_legend_button.click
   end
+
+  def get_overtime_stripes (panel)
+
+    panel.all('.highcharts-series-group > .highcharts-series[visibility=visible]')
+  end
 end
