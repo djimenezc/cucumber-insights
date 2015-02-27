@@ -9,8 +9,9 @@ class ClavisHomePage < BasePage
   # @param [Object] driver defines the driver instance
   # @param [Object] log defines the log instance
   # @param [Object] url defines the clavis login url
-  def initialize(name, driver, log, url, scenario)
-    super(name, driver, log, url, scenario)
+  # @param [Object] page capybara page object
+  def initialize(name, driver, log, url, scenario, page)
+    super(name, driver, log, url, scenario, page)
     @month_array = Date::MONTHNAMES.slice(1, 12)
     @datepicker_info = nil
   end

@@ -11,7 +11,7 @@ Before do |scenario|
   end
 
   # noinspection RubyResolve
-  @insights_page = @browser.create_clavis_page(self, page_id)
+  @insights_page = @browser.create_clavis_page(self, page_id, page)
 
   #if a scenario needs metadata
   if scenario.source_tag_names.include? '@metadata'
