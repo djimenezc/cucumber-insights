@@ -3,9 +3,9 @@ Before do |scenario|
 
   if scenario.source_tag_names.include? '@do-thing-1'
     # @browser.send("create_#{@tag}_page", self)
-    page_id = 'ClavisHomePage';
+    page_id = 'Insights::HomePage';
   elsif scenario.source_tag_names.include? '@portfolio-availability'
-    page_id = 'PortfolioAvailabilityPage'
+    page_id = 'Insights::PortfolioAvailabilityPage'
   else
     page_id='BasePage'
   end
@@ -13,10 +13,8 @@ Before do |scenario|
   # noinspection RubyResolve
   @insights_page = @browser.create_clavis_page(self, page_id, page)
 
-  #if a scenario needs metadata
-  if scenario.source_tag_names.include? '@metadata'
-    @metadata_page = @browser.create_metadata_page(self)
-  end
+  #initialise the metadata login details
+  @md_login_page = @browser.create_metadata_login_page(self, page)
 
   # noinspection RubyResolve
   @browser.log.info('Instancing clavis page')

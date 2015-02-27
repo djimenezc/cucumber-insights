@@ -15,7 +15,7 @@ require 'xmlsimple'
 require 'net/http'
 require 'nokogiri'
 require 'require_all'
-require File.expand_path('../Common_Lib', __FILE__)
+require File.expand_path('../common_lib', __FILE__)
 require 'date'
 
 require_all 'lib'

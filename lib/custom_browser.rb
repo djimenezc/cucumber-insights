@@ -50,6 +50,9 @@ class CustomBrowser
 
   # Opens clavis
   def create_clavis_page(scenario, page_id, page)
+    #initialize login details
+
+
     self.delete_cookies
 
     page_class = class_from_string(page_id)
@@ -58,12 +61,13 @@ class CustomBrowser
     page_id != '' ? page_class.new(page_id, @driver, @log, @site_url, scenario, page) : nil
   end
 
-  def create_metadata_page(scenario, page_id)
-    @metadata_url = ENV['METADATA_URL'] ? ENV['METADATA_URL'] : CONFIG['METADATA_URL']
+  def create_metadata_login_page(scenario, page)
+    @metadata_base_url = ENV['METADATA_URL'] ? ENV['METADATA_URL'] : CONFIG['METADATA_URL']
     @metadata_username = ENV['METADATA_USERNAME'] ? ENV['METADATA_USERNAME'] : CONFIG['METADATA_USERNAME']
     @metadata_password = ENV['METADATA_PASSWORD'] ? ENV['METADATA_PASSWORD'] : CONFIG['METADATA_PASSWORD']
 
-    @metadata_page = MetadataHomePage.new(page_id, @driver, @log, @metadata_url, scenario, @metadata_username, @metadata_password)
+    @metadata_login_url = @metadata_base_url + '/users/sign_in'
+    @metadata_login_page = Metadata::LoginPage.new(@driver, @log, @metadata_login_url, scenario, page, @metadata_username, @metadata_password)
   end
 
   # Sets the timeout to find elements

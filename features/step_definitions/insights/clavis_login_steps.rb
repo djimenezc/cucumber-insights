@@ -43,7 +43,7 @@ Then(/^I am in the main page "(.*?)"$/) do |usernameLabel|
 end
 
 Given(/^I log in Clavis homepage as "(.*?)"$/) do |usernameLabel|
-  @insights_page.open_clavis_home_page(usernameLabel)
+  @insights_page.do_login(usernameLabel)
   page.should have_content('Executive Dashboard')
 end
 
