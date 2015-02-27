@@ -91,6 +91,8 @@ Then(/^Mouse over the bar "(.*?)" in the panel by Online Store$/) do |bar_positi
 
   online_bar_stripes = @insights_page.get_online_bar_rows
 
+  @insights_page.get_online_store_labels.length.should eq(2)
+
   online_bar_stripes[0].all('rect')[bar_position.to_i].hover
   @insights_page.wait_delay
   embed_image("#{(bar_position.to_i + 1).ordinalize} bar moused over")
@@ -101,4 +103,19 @@ Then(/^Display product count of bar "(.*?)" in the overtime panel$/) do |bar_pos
   @insights_page.by_online_store_panel.find('.product-count-over-time.btn.btn-default.btn-block.btn-sm').click
   @insights_page.wait_delay 0.9
   embed_image("#{(bar_position.to_i + 1).ordinalize} product count displayed on OverTime panel")
+end
+
+Then(/^Check the chart column label "(.*?)" position match with the tooltip title$/) do |bar_position|
+
+  @insights_page.by_online_store_panel.find('.popover-title').text.should eq(@insights_page.online_store_labels[bar_position.to_i])
+end
+
+Then(/^Drill down to the Online Store Analysis report$/) do
+
+  @insights_page.by_online_store_panel.find('.availability-analysis.btn').click
+end
+
+Then(/^Verify the filter summary matches with the online store "(.*?)" in portfolio availability chart$/) do |bar_position|
+
+  @insights_page.online_store_labels[bar_position.to_i].should eq(@insights_page.get_filter_summary[0])
 end

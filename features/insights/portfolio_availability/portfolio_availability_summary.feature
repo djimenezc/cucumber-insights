@@ -21,7 +21,7 @@ Feature: Verify executive dashboard panels links
     And Click over the overtime legend buttons
 
   @portfolio-availability @l1
-  Scenario: Verify portfolio availability summary by Online Store
+  Scenario: Verify portfolio availability summary by Online Store panel
     Given I log in Clavis homepage as "KCC US"
     And I am in the main page "KCC US"
     And Click menu item "portfolio_availability_menu_item"
@@ -32,4 +32,19 @@ Feature: Verify executive dashboard panels links
     And Display product count of bar "0" in the overtime panel
     And Mouse over the bar "1" in the panel by Online Store
     And Display product count of bar "1" in the overtime panel
+
+  @portfolio-availability @l1
+  Scenario: Drill down to analysis online_store report
+    Given I log in Clavis homepage as "KCC US"
+    And I am in the main page "KCC US"
+    And Click menu item "portfolio_availability_menu_item"
+    And Click menu item "portfolio_availability_summary_menu_item"
+    And Change the filter date range to '2015-01-29' from '2015-02-26'
+    Then Verify panel by online store is displayed
+    And Mouse over the bar "0" in the panel by Online Store
+    And Check the chart column label "0" position match with the tooltip title
+    And Drill down to the Online Store Analysis report
+    And Verify title is "Portfolio Availability"
+    And Verify subTitle is "Detail"
+    And Verify the filter summary matches with the online store "0" in portfolio availability chart
 

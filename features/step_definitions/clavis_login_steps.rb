@@ -86,7 +86,7 @@ Given(/^Date picker date label is correct$/) do | |
   expect(page).to have_css('.date-range-field > span', text: datepicker_text)
 end
 
-Then(/^Change the filter date range to '(\d+)\-(\d+)\-(\d+)' from '(\d+)\-(\d+)\-(\d+)'$/) do |toYear, toMonth, toDay, fromYear, fromMonth, fromDay|
+Then(/^Change date filter to select the last 3 months$/) do |toYear, toMonth, toDay, fromYear, fromMonth, fromDay|
 
   puts "Change the filter date range to #{toYear}-#{toMonth}-#{toDay} from #{fromYear}-#{fromMonth}-#{fromDay}"
 

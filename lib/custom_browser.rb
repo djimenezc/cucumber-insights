@@ -49,13 +49,13 @@ class CustomBrowser
   end
 
   # Opens clavis
-  def create_clavis_page(scenario, page_id)
+  def create_clavis_page(scenario, page_id, page)
     self.delete_cookies
 
     page_class = class_from_string(page_id)
 
     # Return Clavis page instance
-    page_id != '' ? page_class.new(page_id, @driver, @log, @site_url, scenario) : nil
+    page_id != '' ? page_class.new(page_id, @driver, @log, @site_url, scenario, page) : nil
   end
 
   # Sets the timeout to find elements

@@ -13,7 +13,7 @@ Feature: Verify executive dashboard
     And I am in the main page "KCC US"
     And I am in the executive login page
     And Date picker date label is correct
-    Then Change the filter date range to '2014-05-01' from '2014-05-01'
+    Then Change date filter to select the last 3 months
     And Verify that the date picker filter is applied
     And Open dimension filter picker
     And Uncheck categories

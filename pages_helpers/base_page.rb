@@ -1,7 +1,9 @@
 # @author David Jimenez
 class BasePage
 
-  attr_reader :name, :driver, :log, :url
+  attr_reader :name, :driver, :log, :url, :page
+
+  DELAY = 0.5
 
   # Initialises ClavisHomePage Class
   #
@@ -9,12 +11,13 @@ class BasePage
   # @param [Object] driver defines the driver instance
   # @param [Object] log defines the log instance
   # @param [Object] url defines the clavis login url
-  def initialize(name, driver, log, url, scenario)
+  def initialize(name, driver, log, url, scenario, page)
     @name = name
     @driver = driver
     @log = log
     @url = url
     @scenario = scenario
+    @page = page
   end
 
   def open_clavis_home_page(username_label)
@@ -24,6 +27,9 @@ class BasePage
       password = 'Testing!800'
     elsif (username_label == 'KCC US')
       username = 'kcc_us@clavistechnology.com'
+      password = 'Testing!700'
+    elsif (username_label == 'KCC US TEST')
+      username = 'kcc_us_test2@clavisinsight.com'
       password = 'Testing!700'
     else
       username = 'kcc_us_test2@clavisinsight.com'
@@ -40,4 +46,17 @@ class BasePage
     page.evaluate_script('window.history.back()')
   end
 
+  def get_filter_summary_node
+
+    @page.find('.filters .filter_list .filter_summary')
+  end
+
+  def get_filter_summary
+
+    self.get_filter_summary_node.text.split(';')
+  end
+
+  def wait_delay (delay= DELAY)
+    sleep delay
+  end
 end
