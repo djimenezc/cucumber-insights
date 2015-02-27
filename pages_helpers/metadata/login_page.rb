@@ -10,7 +10,7 @@ module Metadata
     end
 
     def do_login
-      login(@username, @password, @url)
+      login(@username, @password)
     end
   end
 end

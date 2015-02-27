@@ -18,8 +18,7 @@ Given(/^I configure search panels to be displayed$/) do
   # # noinspection RubyResolve
   # @browser.driver.execute_script(jsToRun)
 
-
-  @md_customer_page = Metadata::CustomersPage.new()
+  @browser.create_metadata_customer_list_page
 end
 
 Then(/^I should see the search panels$/) do

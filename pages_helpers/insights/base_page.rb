@@ -23,7 +23,7 @@ module Insights
 
     def do_login(username_label)
       username, password = read_user_info_from_config(username_label)
-      login(username, password, @url)
+      login(username, password)
     end
 
     def read_user_info_from_config(username_label)

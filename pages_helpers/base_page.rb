@@ -21,8 +21,8 @@ module Clavis
       @page = page
     end
 
-    def login(username, password, login_url)
-      @scenario.visit self.url
+    def login(username, password)
+      @scenario.visit @url
       @scenario.fill_in 'user_email', :with => username
       @scenario.fill_in 'user_password', :with => password
       @scenario.click_button 'login'
