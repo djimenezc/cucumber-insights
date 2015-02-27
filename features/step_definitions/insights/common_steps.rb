@@ -41,8 +41,7 @@ Then(/^Change the filter date range to '(\d+)\-(\d+)\-(\d+)' from '(\d+)\-(\d+)\
   from = "#{toYear}-#{toMonth}-#{toDay}"
   to = "#{fromYear}-#{fromMonth}-#{fromDay}"
 
-  jsToRun = "sessionModel.oDateRangePicker.setDates(new Date('#{from}'), new Date('#{to}'))"
-
+  jsToRun = "sessionModel.set('date',{ to: new Date(#{from}'), from: new Date(#{to})})"
   @browser.driver.execute_script(jsToRun)
 
   verify_loading_mask_hidden 20
