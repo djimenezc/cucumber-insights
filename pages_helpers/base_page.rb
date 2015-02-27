@@ -21,6 +21,10 @@ module Clavis
       @page = page
     end
 
+    def visit
+      @scenario.visit @url
+    end
+
     def login(username, password)
       @scenario.visit @url
       @scenario.fill_in 'user_email', :with => username
@@ -33,12 +37,10 @@ module Clavis
     end
 
     def get_filter_summary_node
-
       @page.find('.filters .filter_list .filter_summary')
     end
 
     def get_filter_summary
-
       self.get_filter_summary_node.text.split(';')
     end
 

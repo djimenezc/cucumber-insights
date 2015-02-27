@@ -73,7 +73,7 @@ class CustomBrowser
   def create_metadata_customer_list_page(scenario, page)
     @metadata_base_url = ENV['METADATA_URL'] ? ENV['METADATA_URL'] : CONFIG['METADATA_URL']
     @metadata_customer_list_url = @metadata_base_url + '/customers'
-    @metadata_customer_list_page = Metadata::CustomerListPage.new(@driver, @log, @metadata_customer_list_url, scenario, page)
+    @md_customer_list_page = Metadata::CustomerListPage.new(@driver, @log, @metadata_customer_list_url, scenario, page)
   end
 
   # Sets the timeout to find elements

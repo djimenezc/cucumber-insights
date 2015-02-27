@@ -13,8 +13,9 @@ Before do |scenario|
   # noinspection RubyResolve
   @insights_page = @browser.create_clavis_page(self, page_id, page)
 
-  #initialise the metadata login details
+  #initialise the metadata pages
   @md_login_page = @browser.create_metadata_login_page(self, page)
+  @md_customer_list_page = @browser.create_metadata_customer_list_page(self, page)
 
   # noinspection RubyResolve
   @browser.log.info('Instancing clavis page')
