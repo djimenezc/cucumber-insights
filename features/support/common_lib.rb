@@ -27,14 +27,8 @@ module Common_functions
 
   def embed_image(image_title='SCREENSHOT')
 
-    # puts 'asdasdasd ' + @browser_id
-
-    if @browser_id == 'poltergeist'
-      #save_screenshot("#{image_title}.png")
-    else
-      # encoded_img = @browser.driver.screenshot_as(:base64)
-      # embed("data:image/png;base64,#{encoded_img}", 'image/png', image_title)
-    end
+    encoded_img = @browser.driver.screenshot_as(:base64)
+    embed("data:image/png;base64,#{encoded_img}", 'image/png', image_title)
   end
 
   def wait_for_ajax(timeout=Capybara.default_wait_time)
