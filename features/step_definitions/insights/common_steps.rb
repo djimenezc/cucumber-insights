@@ -38,11 +38,11 @@ end
 
 Then(/^Change the filter date range to '(\d+)\-(\d+)\-(\d+)' from '(\d+)\-(\d+)\-(\d+)'$/) do |toYear, toMonth, toDay, fromYear, fromMonth, fromDay|
 
-  from = "#{toYear}-#{toMonth}-#{toDay}"
-  to = "#{fromYear}-#{fromMonth}-#{fromDay}"
+  to = "#{toYear}-#{toMonth}-#{toDay}"
+  from = "#{fromYear}-#{fromMonth}-#{fromDay}"
 
-  jsToRun = "sessionModel.set('date',{ to: new Date(#{from}'), from: new Date(#{to})})"
+  jsToRun = "sessionModel.set('date',{ to: new Date('#{from}'), from: new Date('#{to}')})"
   @browser.driver.execute_script(jsToRun)
 
-  verify_loading_mask_hidden 20
+  verify_loading_mask_hidden
 end

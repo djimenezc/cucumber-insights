@@ -26,6 +26,7 @@ Feature: Verify executive dashboard panels links
     And I am in the main page "KCC US"
     And Click menu item "portfolio_availability_menu_item"
     And Click menu item "portfolio_availability_summary_menu_item"
+    And Change the filter date range to '2015-01-29' from '2015-02-26'
     Then Verify panel by online store is displayed
     And Click over the legend buttons in the panel by Online Store
     And Mouse over the bar "0" in the panel by Online Store

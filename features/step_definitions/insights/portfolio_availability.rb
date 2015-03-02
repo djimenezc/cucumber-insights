@@ -22,27 +22,29 @@ Then(/^Click over the overtime legend buttons$/) do
 
   embed_image('Before click on In Stock')
 
+  displayed_stripes = @insights_page.overtime_stripes.length
+
   @insights_page.click_on_overtime_legend(/\AIn Stock\z/)
   embed_image('Before clicking on Out of Stock')
-  @insights_page.overtime_stripes.length.should eq(@insights_page.overtime_stripes.length -1)
+  @insights_page.overtime_stripes.length.should eq(displayed_stripes - 1)
 
   @insights_page.click_on_overtime_legend(/\AOut of Stock\z/)
   embed_image('Before clicking on Void')
-  @insights_page.overtime_stripes.length.should eq(@insights_page.overtime_stripes.length - 2)
+  @insights_page.overtime_stripes.length.should eq(displayed_stripes - 2)
 
   @insights_page.click_on_overtime_legend('Void')
   embed_image('After clicking on Void')
-  @insights_page.overtime_stripes.length.should eq(@insights_page.overtime_stripes.length -3)
+  @insights_page.overtime_stripes.length.should eq(displayed_stripes - 3)
 
   #Revert changes
   @insights_page.click_on_overtime_legend(/\AIn Stock\z/)
-  @insights_page.overtime_stripes.length.should eq(@insights_page.overtime_stripes.length -3)
+  @insights_page.overtime_stripes.length.should eq(displayed_stripes - 2)
 
   @insights_page.click_on_overtime_legend(/\AOut of Stock\z/)
-  @insights_page.overtime_stripes.length.should eq(@insights_page.overtime_stripes.length -3)
+  @insights_page.overtime_stripes.length.should eq(displayed_stripes - 1)
 
   @insights_page.click_on_overtime_legend('Void')
-  @insights_page.overtime_stripes.length.should eq(@insights_page.overtime_stripes.length-3)
+  @insights_page.overtime_stripes.length.should eq(displayed_stripes)
 end
 
 Then(/^Verify panel by online store is displayed$/) do
