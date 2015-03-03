@@ -1,7 +1,7 @@
 Feature: Search Scores Click Through
   Clicking through to the search scores page should yield consistent data
 
-  @do-thing-1
+  @home-page
   Scenario: Search Score Click Through
     Given I log in Clavis homepage as "General Mills US"
     And I configure search panels to be displayed

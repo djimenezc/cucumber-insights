@@ -63,7 +63,7 @@ Given(/^I am in the executive login page$/) do
 end
 
 Then(/^Navigation Menu is visible$/) do
-  puts 'Verifying if the menu has few specific entries'
+  @browser.log.info 'Verifying if the menu has few specific entries'
 
   # noinspection RubyResolve
   page.should have_content('Portfolio Availability')
@@ -81,14 +81,14 @@ Given(/^Date picker date label is correct$/) do | |
   datepicker_info = @insights_page.get_datepicker_info
   datepicker_text = "#{datepicker_info.from_date_formatted} - #{datepicker_info.to_date_formatted}"
 
-  puts "date picker text expected #{datepicker_text}"
+  @browser.log.info "date picker text expected #{datepicker_text}"
 
   expect(page).to have_css('.date-range-field > span', text: datepicker_text)
 end
 
-Then(/^Change date filter to select the last 3 months$/) do |toYear, toMonth, toDay, fromYear, fromMonth, fromDay|
+Then(/^Change date filter to select last 3 months$/) do |toYear, toMonth, toDay, fromYear, fromMonth, fromDay|
 
-  puts "Change the filter date range to #{toYear}-#{toMonth}-#{toDay} from #{fromYear}-#{fromMonth}-#{fromDay}"
+  @browser.log.info "Change the filter date range to #{toYear}-#{toMonth}-#{toDay} from #{fromYear}-#{fromMonth}-#{fromDay}"
 
   page.first('.date-range-field').click
 
@@ -135,7 +135,7 @@ Then(/^Verify that the date picker filter is applied$/) do
 
   embed_image 'The date picker shows the new selected range'
 
-  puts 'Closing date picker'
+  @browser.log.info 'Closing date picker'
   page.first('.date-range-field').click
 end
 

@@ -1,7 +1,7 @@
 Feature: Exec Dash Search Panels
   The exec dash should display search panels when configured in metadata
 
-  @do-thing-1
+  @home-page
   Scenario: Search Panels Displayed
     Given I log in to metadata
     And I configure search panels to be displayed for customer "KCC US"
@@ -10,7 +10,7 @@ Feature: Exec Dash Search Panels
     And I go to the exec dash
     Then I should see the search panels
 
-  @do-thing-1
+  @home-page
   Scenario: Search Panels Displayed
     Given I log in to metadata
     And I configure search panels to be hidden for customer "KCC US"

@@ -1,7 +1,7 @@
 Feature: Log in Clavis Insight platform
   The login page verifies if the username and password are correct.
 
-  @do-thing-1 @l1
+  @home-page @l1
   Scenario Outline: Log in
     Given I am on the Clavis login homepage
     When I type the userName "<username>"

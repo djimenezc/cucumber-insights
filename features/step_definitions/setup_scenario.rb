@@ -1,7 +1,7 @@
 # Actions performed before each scenario
 Before do |scenario|
 
-  if scenario.source_tag_names.include? '@do-thing-1'
+  if scenario.source_tag_names.include? '@home-page'
     # @browser.send("create_#{@tag}_page", self)
     page_id = 'Insights::HomePage';
   elsif scenario.source_tag_names.include? '@portfolio-availability'

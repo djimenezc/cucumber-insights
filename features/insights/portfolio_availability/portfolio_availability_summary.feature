@@ -10,7 +10,7 @@ Feature: Verify executive dashboard panels links
     Then Verify title is "Portfolio Availability"
     And Verify report score matches the scorecard score
 
-  @portfolio-availability @l1
+  @portfolio-availability @l2
   Scenario: Verify portfolio availability summary, overtime panel
     Given I log in Clavis homepage as "KCC US"
     And I am in the main page "KCC US"
@@ -20,7 +20,7 @@ Feature: Verify executive dashboard panels links
     And Verify overtime panel is displayed
     And Click over the overtime legend buttons
 
-  @portfolio-availability @l1
+  @portfolio-availability @l2
   Scenario: Verify portfolio availability summary by Online Store panel
     Given I log in Clavis homepage as "KCC US"
     And I am in the main page "KCC US"
@@ -34,7 +34,7 @@ Feature: Verify executive dashboard panels links
     And Mouse over the bar "1" in the panel by Online Store
     And Display product count of bar "1" in the overtime panel
 
-  @portfolio-availability @l1
+  @portfolio-availability @l2
   Scenario: Drill down to analysis online_store report
     Given I log in Clavis homepage as "KCC US"
     And I am in the main page "KCC US"
