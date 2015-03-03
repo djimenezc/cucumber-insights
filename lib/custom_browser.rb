@@ -147,7 +147,7 @@ class CustomBrowser
         driver = :selenium
         require 'headless'
 
-        headless = Headless.new
+        headless = Headless.new(display: 100, reuse: true, destroy_at_exit: false)
         headless.start
       when 'poltergeist'
         driver = :poltergeist

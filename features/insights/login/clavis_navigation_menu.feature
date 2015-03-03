@@ -22,6 +22,7 @@ Feature: Verify executive dashboard
     And Verify subTitle is "Products Not Listed"
     And Click menu item "portfolio_menu_item"
     And Verify title is "Portfolio Analysis"
+    And Verify subTitle is "Overview"
     And Click menu item "price_menu_item"
     And Click menu item "price_summary_menu_item"
     And Verify title is "Price"
