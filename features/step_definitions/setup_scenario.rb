@@ -6,8 +6,10 @@ Before do |scenario|
     page_id = 'Insights::HomePage';
   elsif scenario.source_tag_names.include? '@portfolio-availability'
     page_id = 'Insights::PortfolioAvailabilityPage'
+  elsif scenario.source_tag_names.include? '@portfolio-availability'
+    page_id = 'Insights::SearchScoresPage'
   else
-    page_id='BasePage'
+    page_id='Insights::BasePage'
   end
 
   # noinspection RubyResolve

@@ -7,36 +7,9 @@ And(/^I go to the search scores page$/) do
   verify_loading_mask_hidden 25
 end
 
-Given(/^I configure the priority search toggle to be on by default$/) do
-
-  customer_id = 3
-  config = {
-      'description' => 'i am another description',
-      'sort_order' => '4'
-  }
-
-  @metadata.set_customer_data(customer_id, config)
-
-  jsToRun = <<-eos
-    sessionModel.set('onlyPrioritySearchTerms', "1");
-  eos
-
-  # noinspection RubyResolve
-  @browser.driver.execute_script(jsToRun)
-end
-
 Then(/^The priority terms toggle is set to priority terms$/) do
   value = find(:css, 'ul li.priorityTermsPicker button.active').value
   expect(value).to eq "1"
-end
-
-Given(/^I configure the priority search toggle to be off by default$/) do
-  jsToRun = <<-eos
-    sessionModel.set('onlyPrioritySearchTerms', "0");
-  eos
-
-  # noinspection RubyResolve
-  @browser.driver.execute_script(jsToRun)
 end
 
 Then(/^The priority terms toggle is set to all terms$/) do

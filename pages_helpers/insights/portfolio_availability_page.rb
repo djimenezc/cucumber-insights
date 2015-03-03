@@ -7,7 +7,7 @@
 module Insights
   class PortfolioAvailabilityPage < Insights::BasePage
 
-    attr_accessor :score, :overtime_panel, :by_online_store_panel,
+    attr_accessor  :overtime_panel, :by_online_store_panel,
                   :online_bar_rows, :online_store_labels
 
     def click_on_overtime_legend (text)

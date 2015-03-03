@@ -3,6 +3,7 @@ module Insights
   class BasePage < Clavis::BasePage
 
     attr_reader :name, :driver, :log, :url, :page
+    attr_accessor :score
 
     DELAY = 0.5
 

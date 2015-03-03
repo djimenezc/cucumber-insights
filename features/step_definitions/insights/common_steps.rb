@@ -8,6 +8,21 @@ Then(/^Check panel scores of "(.*?)" panel$/) do |panel_id|
   @browser.log.debug "Keep #{@insights_page.score} as score of #{panel_id}"
 end
 
+Then(/^Compare last graph value for panel "(.*?)" with stored score of panel/) do |panel_id|
+  panel = page.find('#searchScoresOverTime')
+
+  #allow the chart to render
+  @insights_page.wait_delay 5
+
+  panel.find('.highcharts-markers.highcharts-tracker').all('path')[0].hover
+
+  #allow the popup to show
+  @insights_page.wait_delay 1
+
+  val = panel.find('.popover .popover-content div').text
+  @insights_page.score.to_f.should eq(val.to_f.round)
+end
+
 Then(/^Verify report score matches the scorecard score$/) do
   @insights_page.score.should eq(page.find('.total-panel.panel-body.text-center svg .highcharts-title > tspan').text.split('%')[0])
 end
