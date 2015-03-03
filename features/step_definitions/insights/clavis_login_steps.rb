@@ -76,6 +76,10 @@ Then(/^Navigation Menu is visible$/) do
   embed_image 'Page is loaded completely'
 end
 
+Then(/^Click menu item ""$/) do
+
+end
+
 Given(/^Date picker date label is correct$/) do | |
 
   datepicker_info = @insights_page.get_datepicker_info
