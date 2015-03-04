@@ -94,36 +94,39 @@ Then(/^Change date filter to select last 3 months$/) do
 
   @browser.log.info 'Change the filter date range to slect 3 months from today'
 
-  page.first('.date-range-field').click
+  calendar_button = page.first('.date-range-field')
+
+  calendar_button.click
+  calendar_popup = page.find('.date-range-calendar')
 
   # noinspection RubyResolve
   datepicker_info = @insights_page.get_datepicker_info
   # noinspection RubyResolve
-  page.should have_content("#{@insights_page.month_array[datepicker_info.previous_month]}, #{datepicker_info.previous_month_year}")
+  calendar_popup.should have_content("#{@insights_page.month_array[datepicker_info.previous_month]}, #{datepicker_info.previous_month_year}")
   # noinspection RubyResolve
-  page.should have_content("#{@insights_page.month_array[datepicker_info.current_month]}, #{Date.today.year}")
+  calendar_popup.should have_content("#{@insights_page.month_array[datepicker_info.current_month]}, #{Date.today.year}")
   # noinspection RubyResolve
-  page.should have_content("#{@insights_page.month_array[Date.today.mon]}, #{datepicker_info.next_month_year}")
+  calendar_popup.should have_content("#{@insights_page.month_array[Date.today.mon]}, #{datepicker_info.next_month_year}")
 
   embed_image 'After date picker is clicked'
 
-  page.all('.datepickerSaturday.datepickerSelected.selectableDate').last.click
+  calendar_popup.all('.datepickerSaturday.datepickerSelected.selectableDate > a').last.click
 
-  page.first('.datepickerGoPrev').click
-  page.first('.datepickerGoPrev').click
-  page.first('.datepickerGoPrev').click
+  calendar_popup.first('.datepickerGoPrev').click
+  calendar_popup.first('.datepickerGoPrev').click
+  calendar_popup.first('.datepickerGoPrev').click
 
   previous_month_year = Date.today.mon - 2 > 0 ? Date.today.year : Date.today.year - 1
   # noinspection RubyResolve
-  page.should have_content("#{@insights_page.month_array[Date.today.mon - 3]}, #{previous_month_year}")
+  calendar_popup.should have_content("#{@insights_page.month_array[Date.today.mon - 3]}, #{previous_month_year}")
   previous_month_year = Date.today.mon - 3 > 0 ? Date.today.year : Date.today.year - 1
   # noinspection RubyResolve
-  page.should have_content("#{@insights_page.month_array[Date.today.mon - 4]}, #{previous_month_year}")
+  calendar_popup.should have_content("#{@insights_page.month_array[Date.today.mon - 4]}, #{previous_month_year}")
   previous_month_year = Date.today.mon - 4 > 0 ? Date.today.year : Date.today.year - 1
   # noinspection RubyResolve
-  page.should have_content("#{@insights_page.month_array[Date.today.mon - 5]}, #{previous_month_year}")
+  calendar_popup.should have_content("#{@insights_page.month_array[Date.today.mon - 5]}, #{previous_month_year}")
 
-  page.first('.datepickerSaturday.selectableDate').click
+  calendar_popup.first('.datepickerSaturday.selectableDate > a').click
 
   verify_loading_mask_hidden
 end
@@ -132,15 +135,18 @@ Then(/^Verify that the date picker filter is applied$/) do
 
   embed_image 'After date picker previous button was clicked three times and the range was set'
 
-  page.first('.date-range-field').click
+  calendar_button = page.first('.date-range-field')
+
+  calendar_button.click
+  calendar_popup = page.find('.date-range-calendar')
 
   # noinspection RubyResolve
-  page.should have_content("#{@insights_page.month_array[@insights_page.get_datepicker_info.current_month]}, #{Date.today.year}")
+  calendar_popup.should have_content("#{@insights_page.month_array[@insights_page.get_datepicker_info.current_month]}, #{Date.today.year}")
 
   embed_image 'The date picker shows the new selected range'
 
   @browser.log.info 'Closing date picker'
-  page.first('.date-range-field').click
+  calendar_button.click
 end
 
 Then(/^Open dimension filter picker$/) do
