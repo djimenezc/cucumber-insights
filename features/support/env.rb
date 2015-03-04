@@ -26,8 +26,7 @@ $timeout = 1
 $element_timeout=10
 
 #load the config file
-CONFIG = YAML.load_file('config/config.yml')
-
+CONFIG = YAML.load(ERB.new(File.read('config/config.yml')).result)
 # Setup Browser
 @browser_id = CONFIG['CONTROLLER']
 @site_url = CONFIG['URL']
