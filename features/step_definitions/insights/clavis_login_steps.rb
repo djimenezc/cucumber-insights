@@ -90,9 +90,9 @@ Given(/^Date picker date label is correct$/) do | |
   expect(page).to have_css('.date-range-field > span', text: datepicker_text)
 end
 
-Then(/^Change date filter to select last 3 months$/) do |toYear, toMonth, toDay, fromYear, fromMonth, fromDay|
+Then(/^Change date filter to select last 3 months$/) do
 
-  @browser.log.info "Change the filter date range to #{toYear}-#{toMonth}-#{toDay} from #{fromYear}-#{fromMonth}-#{fromDay}"
+  @browser.log.info 'Change the filter date range to slect 3 months from today'
 
   page.first('.date-range-field').click
 
@@ -113,13 +113,13 @@ Then(/^Change date filter to select last 3 months$/) do |toYear, toMonth, toDay,
   page.first('.datepickerGoPrev').click
   page.first('.datepickerGoPrev').click
 
-  previous_month_year = Date.today.mon - 3 > 0 ? Date.today.year : Date.today.year - 1
+  previous_month_year = Date.today.mon - 2 > 0 ? Date.today.year : Date.today.year - 1
   # noinspection RubyResolve
   page.should have_content("#{@insights_page.month_array[Date.today.mon - 3]}, #{previous_month_year}")
-  previous_month_year = Date.today.mon - 4 > 0 ? Date.today.year : Date.today.year - 1
+  previous_month_year = Date.today.mon - 3 > 0 ? Date.today.year : Date.today.year - 1
   # noinspection RubyResolve
   page.should have_content("#{@insights_page.month_array[Date.today.mon - 4]}, #{previous_month_year}")
-  previous_month_year = Date.today.mon - 5 > 0 ? Date.today.year : Date.today.year - 1
+  previous_month_year = Date.today.mon - 4 > 0 ? Date.today.year : Date.today.year - 1
   # noinspection RubyResolve
   page.should have_content("#{@insights_page.month_array[Date.today.mon - 5]}, #{previous_month_year}")
 
@@ -174,7 +174,7 @@ Then(/^Uncheck categories$/) do
 
   page.first('.applyFilters').click
 
-  verify_loading_mask_hidden 25
+  verify_loading_mask_hidden 30
 
   page.first('.filter_summary').click
   wait_for_ajax 30
