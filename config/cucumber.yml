@@ -5,8 +5,8 @@ std_opts = "--format #{ENV['CUCUMBER_FORMAT'] || 'progress'} --strict --tags ~@w
 %>
 default: <%= std_opts %> features
 all: <%= std_opts %> --format progress --tags ~@broken features
-l1: <%= std_opts %> --format html -out reports/l1.html --tags @l1
-l2: <%= std_opts %> --format html -out reports/l2.html --tags @l2
+l1: <%= std_opts %> --format html -out reports/l1.html --tags @l1 ~@broken
+l2: <%= std_opts %> --format html -out reports/l2.html --tags @l2 ~@broken
 slow: --format pretty --strict --tags @slow features
 broken: --format pretty --strict --tags @broken features
 wip: --tags @wip:3 --wip features

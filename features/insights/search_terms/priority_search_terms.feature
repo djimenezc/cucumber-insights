@@ -10,7 +10,7 @@ Feature: Priority Search Terms Toggle
     And I go to the search scores page
     Then The priority terms toggle is set to priority terms
 
-  @home-page @l2
+  @home-page @l2 @broken
   Scenario: Setting the priority search terms toggle to on
     Given I log in to metadata
     And I configure the priority search toggle to be off for customer "General Mills US"
