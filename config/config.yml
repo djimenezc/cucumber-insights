@@ -1,7 +1,6 @@
-URL: http://localhost:3000
-#URL: http://all-ei-dev.elasticbeanstalk.com/
+URL: <%= ENV['URL'] || 'http://all-ei-dev.elasticbeanstalk.com/'  %>
 
-METADATA_URL: http://localhost:5000
+METADATA_URL: <%= ENV['METADATA_URL'] || 'http://all-md-dev.elasticbeanstalk.com/'  %>
 METADATA_USERNAME: ecommerceapp@clavistechnology.com
 METADATA_PASSWORD: rc223svt
 
