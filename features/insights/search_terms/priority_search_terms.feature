@@ -1,7 +1,7 @@
 Feature: Priority Search Terms Toggle
   Ensure the toggle is doing its job correctly
 
-  @home-page @l2
+  @home-page @l2 @broken
   Scenario: Setting the priority search terms toggle to on
     Given I log in to metadata
     And I configure the priority search toggle to be on for customer "General Mills US"
