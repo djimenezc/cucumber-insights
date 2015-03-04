@@ -14,7 +14,7 @@ end
 
 Then(/^The priority terms toggle is set to all terms$/) do
   value = find(:css, 'ul li.priorityTermsPicker button.active').value
-  expect(value).to eq "0"
+  expect(value).to eq '0'
 end
 
 And(/^I click the priority search terms toggle to be all terms$/) do
