@@ -62,16 +62,16 @@ class CustomBrowser
   end
 
   def create_metadata_login_page(scenario, page)
-    @metadata_base_url = ENV['METADATA_URL'] ? ENV['METADATA_URL'] : CONFIG['METADATA_URL']
-    @metadata_username = ENV['METADATA_USERNAME'] ? ENV['METADATA_USERNAME'] : CONFIG['METADATA_USERNAME']
-    @metadata_password = ENV['METADATA_PASSWORD'] ? ENV['METADATA_PASSWORD'] : CONFIG['METADATA_PASSWORD']
+    @metadata_base_url = CONFIG['METADATA_URL']
+    @metadata_username = CONFIG['METADATA_USERNAME']
+    @metadata_password = CONFIG['METADATA_PASSWORD']
 
     @metadata_login_url = @metadata_base_url + '/users/sign_in'
     @metadata_login_page = Metadata::LoginPage.new(@driver, @log, @metadata_login_url, scenario, page, @metadata_username, @metadata_password)
   end
 
   def create_metadata_customer_list_page(scenario, page)
-    @metadata_base_url = ENV['METADATA_URL'] ? ENV['METADATA_URL'] : CONFIG['METADATA_URL']
+    @metadata_base_url = CONFIG['METADATA_URL']
     @metadata_customer_list_url = @metadata_base_url + '/customers'
     @md_customer_list_page = Metadata::CustomerListPage.new(@driver, @log, @metadata_customer_list_url, scenario, page)
   end
@@ -182,8 +182,8 @@ class CustomBrowser
 
   def get_browserstack_url
 
-    username=ENV['BS_USERNAME'] ? ENV['BS_USERNAME'] : CONFIG['BS_USERNAME']
-    key=ENV['BS_AUTHKEY'] ? ENV['BS_AUTHKEY'] : CONFIG['BS_AUTHKEY']
+    username=CONFIG['BS_USERNAME']
+    key=CONFIG['BS_AUTHKEY']
 
     "http://#{username}:#{key}@hub.browserstack.com/wd/hub"
   end

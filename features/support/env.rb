@@ -29,8 +29,8 @@ $element_timeout=10
 CONFIG = YAML.load_file('config/config.yml')
 
 # Setup Browser
-@browser_id = ENV['CONTROLLER'] ? ENV['CONTROLLER'] : CONFIG['CONTROLLER']
-@site_url = ENV['URL'] ? ENV['URL'] : CONFIG['URL']
+@browser_id = CONFIG['CONTROLLER']
+@site_url = CONFIG['URL']
 
 puts "Starting #{@browser_id} browser #{@site_url}"
 
