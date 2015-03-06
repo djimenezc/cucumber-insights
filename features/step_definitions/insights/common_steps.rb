@@ -61,3 +61,8 @@ Then(/^Change the filter date range to '(\d+)\-(\d+)\-(\d+)' from '(\d+)\-(\d+)\
 
   verify_loading_mask_hidden
 end
+
+Then(/^Log out$/) do
+
+  @browser.delete_cookies
+end

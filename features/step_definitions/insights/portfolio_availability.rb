@@ -88,7 +88,7 @@ Then(/^There are "(.*?)" bars in the Online Store panel$/) do |number_bars|
   online_bar_stripes.length.should eq(number_bars)
 end
 
-Then(/^Mouse over the bar "(.*?)" in the panel by Online Store$/) do |bar_position|
+ Then(/^Mouse over the bar "(.*?)" in the panel by Online Store$/) do |bar_position|
 
   online_bar_stripes = @insights_page.get_online_bar_rows
 

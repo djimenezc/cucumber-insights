@@ -5,6 +5,7 @@ Feature: Priority Search Terms Toggle
   Scenario: Setting the priority search terms toggle to on
     Given I log in to metadata
     And I configure the priority search toggle to be on for customer "General Mills US"
+    And Log out
     When I log in Clavis homepage as "General Mills US"
     And I am in the main page "General Mills US"
     And I go to the search scores page
@@ -14,6 +15,7 @@ Feature: Priority Search Terms Toggle
   Scenario: Setting the priority search terms toggle to off
     Given I log in to metadata
     And I configure the priority search toggle to be off for customer "General Mills US"
+    And Log out
     When I log in Clavis homepage as "General Mills US"
     And I am in the main page "General Mills US"
     And I go to the search scores page
