@@ -110,9 +110,6 @@ class CustomBrowser
     browserstack_url = self.get_browserstack_url
     browserstack_capabilities = self.get_browser_capabilities
 
-    Capybara::Screenshot.autosave_on_failure = true
-    Capybara.save_and_open_page_path = 'errors'
-
     self.get_browser_capabilities
     # Define browser to use from config
     case browser
@@ -150,6 +147,9 @@ class CustomBrowser
       when 'selenium'
         driver = :selenium
         require 'headless'
+
+        Capybara::Screenshot.autosave_on_failure = true
+        Capybara.save_and_open_page_path = 'errors'
 
         video_opts = {
             log_file_path: '/tmp/headless.log'

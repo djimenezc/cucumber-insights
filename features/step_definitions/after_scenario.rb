@@ -1,4 +1,7 @@
 After do |scenario|
+
+  embed_image('Scenario failing') if scenario.failed?
+
   #clean browser storage
   @browser.log.debug 'Cleaning browser storage'
   page.execute_script('if (localStorage && localStorage.clear) localStorage.clear()')
@@ -6,13 +9,13 @@ After do |scenario|
 
   if CONFIG['RECORD_VIDEO?'] && !@browser.headless.nil?
 
-    # if scenario.failed?
-    @browser.log.debug 'Stopping and keeping video'
-    @browser.headless.video.stop_and_save(video_path(scenario))
-    # else
-    #   @browser.log.debug 'Stopping video'
-    #   @browser.headless.video.stop_and_discard
-    # end
+    if scenario.failed?
+      @browser.log.debug 'Stopping and keeping video'
+      @browser.headless.video.stop_and_save(video_path(scenario))
+    else
+      @browser.log.debug 'Stopping video'
+      @browser.headless.video.stop_and_discard
+    end
   end
 
 end
