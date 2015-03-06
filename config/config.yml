@@ -7,7 +7,7 @@ METADATA_PASSWORD: <%= ENV['METADATA_PASSWORD'] || 'rc223svt' %>
 CONTROLLER: <%= ENV['CONTROLLER'] || 'chrome' %>
 BS_USERNAME: <%= ENV['BS_USERNAME'] || 'david1347' %>
 BS_AUTHKEY: <%= ENV['BS_AUTHKEY'] || 'ntnBqvSYwxip1XQUnPM7' %>
-RECORD_VIDEO?: <%= ENV['RECORD_VIDEO'] == 'true' >
+RECORD_VIDEO?: <%= ENV['RECORD_VIDEO'] == 'true' %>
 
 USERS:
   KCC US:

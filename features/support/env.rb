@@ -33,7 +33,7 @@ CONFIG = YAML.load(ERB.new(File.read('config/config.yml')).result)
 @browser_id = CONFIG['CONTROLLER']
 @site_url = CONFIG['URL']
 
-puts "Starting #{@browser_id} browser #{@site_url}"
+puts "Starting #{@browser_id} browser #{@site_url} recording video: #{CONFIG['RECORD_VIDEO?']}"
 
 Dir.mkdir('logs') unless File.exists?('logs')
 Dir.mkdir('reports') unless File.exists?('reports')
