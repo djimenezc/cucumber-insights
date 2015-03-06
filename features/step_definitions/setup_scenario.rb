@@ -17,7 +17,12 @@ Before do |scenario|
 
   #initialise the metadata pages
   @md_login_page = @browser.create_metadata_login_page(self, page)
-  @md_customer_list_page = @browser.create_metadata_customer_list_page(self, page)
+  @md_customer_list_page = @browser.create_md_customer_list_page(self, page)
+
+  if CONFIG['RECORD_VIDEO?'] && !@browser.headless.nil?
+    @browser.log.debug 'Starting video'
+    @browser.headless.video.start_capture
+  end
 
   # noinspection RubyResolve
   @browser.log.info('Instancing clavis page')

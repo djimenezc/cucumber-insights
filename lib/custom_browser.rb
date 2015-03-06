@@ -9,7 +9,7 @@ class CustomBrowser
   # noinspection RubyResolve
   include Common_functions
 
-  attr_reader :driver, :browser_name, :x_position, :y_position, :screen_width, :screen_height, :log, :site_url
+  attr_reader :driver, :browser_name, :x_position, :y_position, :screen_width, :screen_height, :log, :site_url, :headless
 
   # Initialises Browser Class
   #
@@ -22,7 +22,7 @@ class CustomBrowser
   def initialize(browser_name, x_position, y_position, screen_width, screen_height, site_url)
     @browser_name = browser_name
     @log = Logger.new(DirectoryHelper.create_log_directory + browser_name + '-' + DateHelper.set_log_timestamp, 'daily')
-    @driver = start_browser(@browser_name)
+    @driver, @headless = start_browser(@browser_name)
     @x_position = x_position
     @y_position = y_position
     @screen_width = screen_width
@@ -70,7 +70,7 @@ class CustomBrowser
     @metadata_login_page = Metadata::LoginPage.new(@driver, @log, @metadata_login_url, scenario, page, @metadata_username, @metadata_password)
   end
 
-  def create_metadata_customer_list_page(scenario, page)
+  def create_md_customer_list_page(scenario, page)
     @metadata_base_url = CONFIG['METADATA_URL']
     @metadata_customer_list_url = @metadata_base_url + '/customers'
     @md_customer_list_page = Metadata::CustomerListPage.new(@driver, @log, @metadata_customer_list_url, scenario, page)
@@ -106,8 +106,12 @@ class CustomBrowser
     @log.info('Starting the browser: ' + browser)
 
     driver = nil
+    headless = nil
     browserstack_url = self.get_browserstack_url
     browserstack_capabilities = self.get_browser_capabilities
+
+    Capybara::Screenshot.autosave_on_failure = true
+    Capybara.save_and_open_page_path = 'errors'
 
     self.get_browser_capabilities
     # Define browser to use from config
@@ -147,7 +151,11 @@ class CustomBrowser
         driver = :selenium
         require 'headless'
 
-        headless = Headless.new(display: 100, reuse: true, destroy_at_exit: false)
+        video_opts = {
+            log_file_path: '/tmp/headless.log'
+        }
+
+        headless = Headless.new(display: 100, reuse: true, destroy_at_exit: false, video: video_opts)
         headless.start
       when 'poltergeist'
         driver = :poltergeist
@@ -177,7 +185,7 @@ class CustomBrowser
     Capybara.app_host = 'http://www.google.co.uk' #if you have your own project, you can set your own app_host here.
 
     # Return driver
-    Capybara.current_session.driver.browser
+    return Capybara.current_session.driver.browser, headless
   end
 
   def get_browserstack_url

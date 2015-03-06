@@ -6,6 +6,7 @@ require 'bundler/setup'
 require 'capybara'
 require 'capybara/cucumber'
 require 'capybara/poltergeist'
+require 'capybara-screenshot/cucumber'
 require 'rspec'
 require 'selenium-webdriver'
 require File.expand_path('../../../3rd_party_libraries/fast_selenium', __FILE__) if ENV['BROWSERSTACK'] == 'true'
@@ -26,6 +27,7 @@ $timeout = 1
 $element_timeout=10
 
 #load the config file
+# noinspection RubyResolve
 CONFIG = YAML.load(ERB.new(File.read('config/config.yml')).result)
 # Setup Browser
 @browser_id = CONFIG['CONTROLLER']
@@ -35,6 +37,8 @@ puts "Starting #{@browser_id} browser #{@site_url}"
 
 Dir.mkdir('logs') unless File.exists?('logs')
 Dir.mkdir('reports') unless File.exists?('reports')
+Dir.mkdir('videos') unless File.exists?('videos')
+Dir.mkdir('errors') unless File.exists?('errors')
 
 browser = CustomBrowser.new(@browser_id, ENV['XPOSITION'], ENV['YPOSITION'], ENV['SCREENWIDTH'], ENV['SCREENHEIGHT'], @site_url)
 
@@ -44,6 +48,7 @@ if @browser_id != 'poltergeist'
   browser.delete_cookies
   browser.set_timeout($timeout, $element_timeout)
 end
+
 
 # Actions performed before each scenario
 Before do |scenario|
