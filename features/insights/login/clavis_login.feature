@@ -11,7 +11,7 @@ Feature: Log in Clavis Insight platform
 
   Examples:
     | username                              | password    | usernameLabel    |
-    | kcc_us_test2@clavisinsight.com        | Testing!700 | KCC TEST USER    |
+    | kcc_us_test2@clavisinsight.com        | Testing!700 | KCC TEST         |
     | general_mills_us@clavistechnology.com | Testing!800 | General Mills US |
 
 

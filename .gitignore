@@ -8,3 +8,5 @@ app/bower_components
 atlassian-ide-plugin.xml
 logs/*
 reports/*
+videos/*
+errors/*
