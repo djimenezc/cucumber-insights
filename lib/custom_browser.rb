@@ -5,6 +5,7 @@ class CustomBrowser
   include DateHelper
   # noinspection RubyResolve
   include DirectoryHelper
+  include ResponsiveHelper
   include RSpec::Matchers
   # noinspection RubyResolve
   include Common_functions

@@ -15,10 +15,13 @@ USERS:
     password: Testing!700
   GENERAL MILLS US:
     username: general_mills_us@clavistechnology.com
-    password: Testing!800
+    password: Testing!2222
+  BARILLA US:
+    username: barilla_us@clavistechnology.com
+    password: Testing!5000
   KCC US TEST:
     username: kcc_us_test2@clavisinsight.com
-    password: Testing!700
+    password: Testing!7000
   KCC US TEST 2:
     username: kcc_us_test2@clavisinsight.com
-    password: Testing!700
+    password: Testing!7000

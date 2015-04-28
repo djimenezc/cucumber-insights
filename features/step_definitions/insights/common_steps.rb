@@ -66,3 +66,9 @@ Then(/^Log out$/) do
 
   @browser.delete_cookies
 end
+
+When(/^Data is loaded$/) do
+
+  wait_for_ajax 20
+end
+

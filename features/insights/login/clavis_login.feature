@@ -10,9 +10,9 @@ Feature: Log in Clavis Insight platform
     Then I am in the main page "<usernameLabel>"
 
   Examples:
-    | username                              | password    | usernameLabel    |
-    | kcc_us_test2@clavisinsight.com        | Testing!700 | KCC TEST         |
-    | general_mills_us@clavistechnology.com | Testing!800 | General Mills US |
+    | username                              | password     | usernameLabel    |
+    | barilla_us@clavistechnology.com       | Testing!5000 | Barilla US       |
+    | general_mills_us@clavistechnology.com | Testing!2222 | General Mills US |
 
 
 
